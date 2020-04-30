@@ -5,7 +5,7 @@ import android.view.MenuItem
 
 import androidx.appcompat.app.AppCompatActivity
 
-class Configuracao_mainActivity : AppCompatActivity() {
+class Configuracao_mainActivity :DebugActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
