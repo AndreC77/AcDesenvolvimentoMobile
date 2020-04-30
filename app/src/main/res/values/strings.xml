@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Mais Venda App</string>
+    <string name="app_name">Mais Venda</string>
+    <string name="nav_open">Abrir</string>
+    <string name="nav_close">Fechar</string>
 </resources>

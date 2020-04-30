@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.andrecoelho.lunneapp">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,9 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Tela_inicial_Activity"/>
-        <activity android:name=".TelaSecundariaActivity"/>
-        <activity android:name=".Configuracao_mainActivity"/>
+        <activity android:name=".TelaInicialActivity"/>
+        <activity android:name=".TelaSecundariaActivity"
+            android:theme="@style/AppTheme.Toolbar"/>
+        <activity android:name=".ConfigMainActivity"/>
         <activity android:name=".TelaCadastroActivity"/>
     </application>
 

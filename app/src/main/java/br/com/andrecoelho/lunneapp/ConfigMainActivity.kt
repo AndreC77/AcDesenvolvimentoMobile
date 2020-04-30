@@ -3,13 +3,11 @@ package br.com.andrecoelho.lunneapp
 import android.os.Bundle
 import android.view.MenuItem
 
-import androidx.appcompat.app.AppCompatActivity
-
-class Configuracao_mainActivity :DebugActivity() {
+class ConfigMainActivity :DebugActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.configuracao_main)
+        setContentView(R.layout.config_main)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Configurações"

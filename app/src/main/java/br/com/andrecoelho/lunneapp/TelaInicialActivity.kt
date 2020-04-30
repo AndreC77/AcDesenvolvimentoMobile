@@ -5,14 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import kotlinx.android.synthetic.main.activity_tela_inicial.*
-import kotlinx.android.synthetic.main.login.*
 
-class Tela_inicial_Activity : DebugActivity() {
+class TelaInicialActivity : DebugActivity() {
 
     override  fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -66,7 +62,7 @@ class Tela_inicial_Activity : DebugActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        var intent = Intent(this, Configuracao_mainActivity ::class.java)
+        var intent = Intent(this, ConfigMainActivity ::class.java)
         var intent2 = Intent(this, TelaCadastroActivity ::class.java)
         val id = item.itemId
 
