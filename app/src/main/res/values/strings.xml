@@ -2,4 +2,8 @@
     <string name="app_name">Mais Venda</string>
     <string name="nav_open">Abrir</string>
     <string name="nav_close">Fechar</string>
+
+    <!--strings login-->
+    <string name="user">Usuário</string>
+    <string name="password">Digite sua senha</string>
 </resources>
