@@ -6,4 +6,8 @@
     <!--strings login-->
     <string name="user">Usuário</string>
     <string name="password">Digite sua senha</string>
+
+    <!--string cadastro de cliente-->
+    <string name="code">Código</string>
+    <string name="register">Registro Federal</string>
 </resources>
