@@ -1,46 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CadastroClienteActivity"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textInicial"
+        android:id="@+id/txtNovoCliente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cadastro de um nova cor:" />
+        android:text="Novo Cliente:" />
 
     <TextView
-        android:id="@+id/txtIdProduto"
+        android:id="@+id/txtInsertCodigoCliente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Codigo:" />
 
     <EditText
-        android:id="@+id/insertCodigoCor"
+        android:id="@+id/insertCodCliente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number" />
 
     <TextView
-        android:id="@+id/textDescricao"
+        android:id="@+id/txtInsertRegsFederal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Descrição:" />
+        android:text="Registro Federal:" />
 
     <EditText
-        android:id="@+id/insertDescCor"
+        android:id="@+id/insertRegsFederal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName" />
-
-    <Button
-        android:id="@+id/buttonSalvarCor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="Salvar"
-        android:textColor="@color/branco" />
-
 </LinearLayout>

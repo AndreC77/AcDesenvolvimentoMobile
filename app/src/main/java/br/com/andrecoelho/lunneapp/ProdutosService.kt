@@ -5,32 +5,35 @@ import android.util.Log
 import br.com.fernandosousa.lmsapp.HttpHelper
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import java.net.URL
 
-object ClientesService {
-
+object ProdutosService {
     val host = "http://192.168.100.8:8080"
     val TAG = "WS_LMSApp"
 
-    fun getCliente(context: Context): List<Clientes> {
+    fun getProdutos(context: Context): List<Produtos> {
 
         if(AndroidUtils.isInternetDisponivel(context)) {
-            val url = "$host/clientes"
+            val url = "$host/produtos"
             val json = HttpHelper.get(url)
 
             Log.d(TAG, json)
 
-            return parserJson<List<Clientes>>(json)
+            return parserJson<List<Produtos>>(json)
         }else{
             return ArrayList()
         }
     }
 
-    fun delete(cliente: Clientes): Response {
-        Log.d(TAG, cliente.idCliente.toString())
-        val url = "$host/clientes/${cliente.idCliente}"
+    fun delete(produto: Produtos): Response {
+        Log.d(TAG, produto.idProduto.toString())
+        val url = "${host}/produtos/${produto.idProduto}"
         val json = HttpHelper.delete(url)
         Log.d(TAG, json)
+        return parserJson(json)
+    }
+
+    fun save(produto: Produtos): Response {
+        val json = HttpHelper.post("${host}/produtos", produto.toJson())
         return parserJson(json)
     }
 
@@ -39,5 +42,4 @@ object ClientesService {
         return Gson().fromJson<T>(json, type)
 
     }
-
 }

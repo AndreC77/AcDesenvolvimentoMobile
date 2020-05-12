@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CadastroProdutoActivity"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtNovoProduto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Novo Produto" />
+
+    <TextView
+        android:id="@+id/txtInsertCodProduto1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Codigo:" />
+
+    <EditText
+        android:id="@+id/insertCodProduto1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/txtInsertCodEan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="EAN 13:" />
+
+    <EditText
+        android:id="@+id/insertCodEan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/txtInsertReferencia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Referencia:" />
+
+    <EditText
+        android:id="@+id/insertReferencia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/txtNcm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NCM:" />
+
+    <EditText
+        android:id="@+id/insertNcm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/txtInsertCor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cor:" />
+
+    <EditText
+        android:id="@+id/insertCorProduto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/txtInsertDescReduzida"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descrição Reduzida:" />
+
+    <EditText
+        android:id="@+id/insertDescReduzida"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/txtDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descrição:" />
+
+    <EditText
+        android:id="@+id/insertDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/txtUnidDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Unidade Desc.:" />
+
+    <Spinner
+        android:id="@+id/spinnerUndDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtInsertDescUnid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descrição Unidade:" />
+
+    <EditText
+        android:id="@+id/insertDescUnid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/txtInsertUnid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Unidade:" />
+
+    <EditText
+        android:id="@+id/insertUnidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/txtInsertOrigem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Origem:" />
+
+            <Spinner
+                android:id="@+id/spinnerOrigem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtInsertCusto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Custo:" />
+
+            <EditText
+                android:id="@+id/insertCusto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/txtInsertPreco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Preço:" />
+
+            <EditText
+                android:id="@+id/insertPreco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/txtInsertAltura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Altura:" />
+
+            <EditText
+                android:id="@+id/insertAltura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/txtInsertLargura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Largura:" />
+
+            <EditText
+                android:id="@+id/insertLargura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/txtInsertComprimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Comprimento:" />
+
+            <EditText
+                android:id="@+id/insertComprimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/txtPeso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Peso:" />
+
+            <EditText
+                android:id="@+id/insertPeso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+            <Button
+                android:id="@+id/buttonSalvarProduto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="Salvar"
+                android:textColor="@color/branco" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

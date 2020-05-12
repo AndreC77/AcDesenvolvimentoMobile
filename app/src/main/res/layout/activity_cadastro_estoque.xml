@@ -1,46 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CadastroEstoqueActivity"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textInicial"
+        android:id="@+id/txtNovoEstoque"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cadastro de um nova cor:" />
+        android:text="Novo Estoque" />
 
     <TextView
-        android:id="@+id/txtIdProduto"
+        android:id="@+id/txtInsertCodEstoque"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Codigo:" />
 
     <EditText
-        android:id="@+id/insertCodigoCor"
+        android:id="@+id/insertCodEstoque"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number" />
 
-    <TextView
-        android:id="@+id/textDescricao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Descrição:" />
-
-    <EditText
-        android:id="@+id/insertDescCor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
     <Button
-        android:id="@+id/buttonSalvarCor"
+        android:id="@+id/buttonSalvarEstoque"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:text="Salvar"
         android:textColor="@color/branco" />
-
 </LinearLayout>

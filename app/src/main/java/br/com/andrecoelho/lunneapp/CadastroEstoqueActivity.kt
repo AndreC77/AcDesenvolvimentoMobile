@@ -1,29 +1,27 @@
 package br.com.andrecoelho.lunneapp
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.EditText
-import kotlinx.android.synthetic.main.activity_tela_cadastro.*
-import kotlinx.android.synthetic.main.activity_tela_cadastro.view.*
+import kotlinx.android.synthetic.main.activity_cadastro_estoque.*
+import kotlinx.android.synthetic.main.activity_tela_inicial.*
 import java.lang.Long.parseLong
 
-class TelaCadastroActivity : DebugActivity() {
+class CadastroEstoqueActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tela_cadastro)
+        setContentView(R.layout.activity_cadastro_estoque)
 
-        buttonSalvarCor.setOnClickListener{
-            val cor = Cores()
-            cor.idCor = 0
-            cor.descricaoCor = insertDescCor.text.toString()
-            cor.codCor = parseLong(insertCodigoCor.text.toString())
-            //cor.codCor = 102
-            taskAtualizar(cor)
+        val estoque = Estoque()
+
+        buttonSalvarEstoque.setOnClickListener {
+            estoque.codProduto = parseLong(insertCodEstoque.text.toString())
+            taskAtualizar(estoque)
         }
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Incluir Cor"
+        supportActionBar?.title = "Incluir Estoque"
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -34,15 +32,14 @@ class TelaCadastroActivity : DebugActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun taskAtualizar(cores: Cores) {
+    private fun taskAtualizar(estoque: Estoque) {
         // Thread para salvar a Cor
         Thread {
-            CoresService.save(cores)
+            EstoqueService.save(estoque)
             runOnUiThread {
                 // após cadastrar, voltar para activity anterior
                 finish()
             }
         }.start()
     }
-
 }

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CadastroVendedorActivity"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtNovoVendedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Novo Vendedor" />
+
+    <TextView
+        android:id="@+id/txtInsertNomeVendedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nome:" />
+
+    <EditText
+        android:id="@+id/insertNomeVendedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/txtInsertEmailVendedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email:" />
+
+    <EditText
+        android:id="@+id/insertEmailVendedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/txtInsertSenhaVendedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Senha:" />
+
+    <EditText
+        android:id="@+id/insertSenhaVendedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/txtConfirmacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirmação de Senha:" />
+
+    <EditText
+        android:id="@+id/confirmarSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/txtTelVendedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Telefone:" />
+
+            <EditText
+                android:id="@+id/insertTelVendedor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:maxLength="15" />
+
+            <TextView
+        android:id="@+id/txtCelVendedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Celular:" />
+
+            <EditText
+                android:id="@+id/insertCelVendedor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+        android:id="@+id/txtCodVendedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Codigo:" />
+
+    <EditText
+        android:id="@+id/insertCodVendedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/txtInsertFuncionario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Funcionario:" />
+
+    <Spinner
+        android:id="@+id/spinnerFuncionario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/buttonSalvarVendedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="Salvar"
+        android:textColor="@color/branco" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:style="http://schemas.android.com/tools"
-    android:id="@+id/cardClientes"
+    android:id="@+id/cardFormaDePgto"
     android:layout_margin="6dp"
     app:cardElevation="3dp"
     app:cardPreventCornerOverlap="false"
@@ -17,31 +17,8 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <FrameLayout
-            android:layout_width="87dp"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/cardImage"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="6dp"
-                app:srcCompat="@drawable/user" />
-
-            <ProgressBar
-                android:id="@+id/cardProgress"
-                style="@android:style/Widget.ProgressBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="6dp"
-                android:visibility="invisible" />
-
-        </FrameLayout>
-
         <TextView
-            android:id="@+id/cardNome"
+            android:id="@+id/cardNomef"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"

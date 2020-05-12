@@ -5,32 +5,36 @@ import android.util.Log
 import br.com.fernandosousa.lmsapp.HttpHelper
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import java.net.URL
 
-object ClientesService {
+object EstoqueService {
 
     val host = "http://192.168.100.8:8080"
     val TAG = "WS_LMSApp"
 
-    fun getCliente(context: Context): List<Clientes> {
+    fun getEstoque(context: Context): List<Estoque> {
 
         if(AndroidUtils.isInternetDisponivel(context)) {
-            val url = "$host/clientes"
+            val url = "${host}/estoque"
             val json = HttpHelper.get(url)
 
             Log.d(TAG, json)
 
-            return parserJson<List<Clientes>>(json)
+            return parserJson<List<Estoque>>(json)
         }else{
             return ArrayList()
         }
     }
 
-    fun delete(cliente: Clientes): Response {
-        Log.d(TAG, cliente.idCliente.toString())
-        val url = "$host/clientes/${cliente.idCliente}"
+    fun delete(estoque: Estoque): Response {
+        Log.d(TAG, estoque.idEstoque.toString())
+        val url = "${host}/estoque/${estoque.idEstoque}"
         val json = HttpHelper.delete(url)
         Log.d(TAG, json)
+        return parserJson(json)
+    }
+
+    fun save(estoque: Estoque): Response {
+        val json = HttpHelper.post("${host}/estoque", estoque.toJson())
         return parserJson(json)
     }
 

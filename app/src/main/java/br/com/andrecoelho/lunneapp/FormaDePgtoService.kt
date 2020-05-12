@@ -5,32 +5,37 @@ import android.util.Log
 import br.com.fernandosousa.lmsapp.HttpHelper
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import java.net.URL
 
-object ClientesService {
+object FormaDePgtoService {
 
     val host = "http://192.168.100.8:8080"
     val TAG = "WS_LMSApp"
 
-    fun getCliente(context: Context): List<Clientes> {
+    fun getForma(context: Context): List<FormaDePagamento> {
 
         if(AndroidUtils.isInternetDisponivel(context)) {
-            val url = "$host/clientes"
+            val url = "${host}/formadepagamento"
             val json = HttpHelper.get(url)
 
             Log.d(TAG, json)
 
-            return parserJson<List<Clientes>>(json)
+            return parserJson<List<FormaDePagamento>>(json)
+
         }else{
             return ArrayList()
         }
     }
 
-    fun delete(cliente: Clientes): Response {
-        Log.d(TAG, cliente.idCliente.toString())
-        val url = "$host/clientes/${cliente.idCliente}"
+    fun delete(forma: FormaDePagamento): Response {
+        Log.d(TAG, forma.idFormaDePgto.toString())
+        val url = "${host}/formadepagamento/${forma.idFormaDePgto}"
         val json = HttpHelper.delete(url)
         Log.d(TAG, json)
+        return parserJson(json)
+    }
+
+    fun save(forma: FormaDePagamento): Response {
+        val json = HttpHelper.post("${host}/formadepagamento", forma.toJson())
         return parserJson(json)
     }
 
