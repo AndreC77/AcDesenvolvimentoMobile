@@ -2,7 +2,15 @@
 <resources>
     <color name="colorPrimary">#F1C8C2</color>
     <color name="colorPrimaryDark">#EB9487</color>
-    <color name="colorAccent">#F85C8F</color>
+
+    <!--cor da barra de digitacao-->
+    <color name="colorAccent">#EB9487</color>
+
     <color name="branco">#FFFFFF</color>
 
+    <!--cor da borda login/senha-->
+    <color name="colorViewLine">#FEA8AB</color>
+
+    <!--cor do background em foco login/senha-->
+    <color name="colorFieldFocused">#FCF1F1</color>
 </resources>

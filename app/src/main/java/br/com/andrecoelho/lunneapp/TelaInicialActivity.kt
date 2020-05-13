@@ -13,7 +13,7 @@ class TelaInicialActivity : DebugActivity() {
     override  fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tela_inicial)
-        bemVindo.text = "Bem vindo ao Mais Vendas App"
+        bemVindo.text = "Bem vindo!"
 
         buttonClientes.setOnClickListener {
             var intent = Intent(this, TelaClienteActivity ::class.java)

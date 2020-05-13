@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CadastroEstoqueActivity"
     android:orientation="vertical">
+
+    <!--codigo estoque
 
     <TextView
         android:id="@+id/txtNovoEstoque"
@@ -17,14 +19,22 @@
         android:id="@+id/txtInsertCodEstoque"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Codigo:" />
+        android:layout_marginTop="36dp"
+        android:text="Codigo:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/insertCodEstoque"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number" />
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="64dp" />
 
     <Button
         android:id="@+id/buttonSalvarEstoque"
@@ -32,5 +42,55 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:text="Salvar"
-        android:textColor="@color/branco" />
-</LinearLayout>
+        android:textColor="@color/branco"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="138dp" />
+    -->
+
+    <!--novo codigo estoque-->
+    <ImageView
+        android:id="@+id/imageViewPrincipal"
+        android:layout_width="236dp"
+        android:layout_height="108dp"
+        android:backgroundTint="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.101"
+        app:srcCompat="@drawable/logo"
+        android:contentDescription="TODO" />
+
+    <EditText
+        android:id="@+id/insertCodEstoque"
+        android:layout_width="360dp"
+        android:layout_height="42dp"
+        android:background="@drawable/bg_form_field_sqr2"
+        android:hint="@string/code"
+        android:inputType="number"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.381" />
+
+    <Button
+        android:id="@+id/buttonSalvarEstoque"
+        android:layout_width="350dp"
+        android:layout_height="35dp"
+        android:background="#000000"
+        android:text="Salvar"
+        android:textColor="@color/branco"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/insertCodEstoque"
+        app:layout_constraintVertical_bias="0.03000000" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
