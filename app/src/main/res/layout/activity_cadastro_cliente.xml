@@ -48,7 +48,7 @@
 
     <!--novo registro federal-->
 
-    <ImageButton
+    <ImageView
         android:id="@+id/imageViewPrincipal"
         android:layout_width="236dp"
         android:layout_height="108dp"

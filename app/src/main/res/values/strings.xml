@@ -14,6 +14,45 @@
     <!--string descricao-->
     <string name="descript">Descrição</string>
 
+    <!--string descricao reduzida-->
+    <string name="descriptred">Descrição Reduzida</string>
+
+    <!--string EAN 13-->
+    <string name="ean13">EAN 13</string>
+
+    <!--string referencia-->
+    <string name="reference">Referência</string>
+
+    <!--string NCM-->
+    <string name="ncm">NCM</string>
+
+    <!--string cor-->
+    <string name="cor">Cor</string>
+
+    <!--string unidade-->
+    <string name="unity">Unidade</string>
+
+    <!--string descricao unidade-->
+    <string name="descriptuni">Descrição Unidade</string>
+
+    <!--string peso-->
+    <string name="weight">Peso</string>
+
+    <!--string compimento-->
+    <string name="length">Comprimento</string>
+
+    <!--string largura-->
+    <string name="widthproduct">Largura</string>
+
+    <!--string altura-->
+    <string name="heigthproduct">Altura</string>
+
+    <!--string preco-->
+    <string name="priceproduct">Preço</string>
+
+
+    <!--string custo-->
+    <string name="coastproduct">Custo</string>
 
 
 </resources>
