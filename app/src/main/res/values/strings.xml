@@ -3,13 +3,19 @@
     <string name="nav_open">Abrir</string>
     <string name="nav_close">Fechar</string>
 
-    <!--strings usuario e senha-->
+    <!--strings usuario, senha e confirmacao da senha-->
     <string name="user">Usuário</string>
     <string name="password">Digite sua senha</string>
-
+    <string name="confirmpassword">Confirmação de Senha</string>
     <!--string codigo e codigo registro federal-->
     <string name="code">Código</string>
     <string name="register">Registro Federal</string>
+
+    <!--string nome-->
+    <string name="name">Nome</string>
+
+    <!--string email-->
+    <string name="email">E-mail</string>
 
     <!--string descricao-->
     <string name="descript">Descrição</string>
@@ -53,6 +59,12 @@
 
     <!--string custo-->
     <string name="coastproduct">Custo</string>
+
+    <!--string celular-->
+    <string name="cellphone">Celular</string>
+
+    <!--string telefone-->
+    <string name="telephone">Telefone</string>
 
 
 </resources>
