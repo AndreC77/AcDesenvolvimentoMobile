@@ -3,11 +3,17 @@
     <string name="nav_open">Abrir</string>
     <string name="nav_close">Fechar</string>
 
-    <!--strings login-->
+    <!--strings usuario e senha-->
     <string name="user">Usuário</string>
     <string name="password">Digite sua senha</string>
 
-    <!--string cadastro de cliente-->
+    <!--string codigo e codigo registro federal-->
     <string name="code">Código</string>
     <string name="register">Registro Federal</string>
+
+    <!--string descricao-->
+    <string name="descript">Descrição</string>
+
+
+
 </resources>
