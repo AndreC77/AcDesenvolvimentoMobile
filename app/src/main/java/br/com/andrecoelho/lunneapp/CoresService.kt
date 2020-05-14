@@ -16,12 +16,15 @@ object CoresService {
         if(AndroidUtils.isInternetDisponivel(context)) {
             val url = "$host/cor"
             val json = HttpHelper.get(url)
-
+            var cores = parserJson<List<Cores>>(json)
+            for(d in cores){
+                saveOffLine(d)
+            }
             Log.d(TAG, json)
-
-            return parserJson<List<Cores>>(json)
+            return cores
         }else{
-            return ArrayList()
+            var dao = DataBaseManager.getCoresDao()
+            return dao.findAll()
         }
     }
 
@@ -36,6 +39,22 @@ object CoresService {
     fun save(cor: Cores): Response {
         val json = HttpHelper.post("$host/cor", cor.toJson())
         return parserJson(json)
+    }
+
+    fun saveOffLine(cor : Cores) : Boolean {
+
+        val dao = DataBaseManager.getCoresDao()
+        if(!existeCor(cor)){
+            dao.insert(cor)
+        }
+        return true
+
+    }
+
+
+    fun existeCor(cor : Cores) : Boolean{
+        val dao = DataBaseManager.getCoresDao()
+        return dao.getById(cor.idCor) != null
     }
 
 

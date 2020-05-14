@@ -1,4 +1,9 @@
 package br.com.andrecoelho.lunneapp
 
-class LMSDataBase {
+import androidx.room.Database
+import androidx.room.RoomDatabase
+
+@Database(entities = arrayOf(Cores::class), version = 1)
+abstract class LMSDataBase : RoomDatabase() {
+    abstract fun coresDAO() : CoresDAO
 }

@@ -76,6 +76,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textSenha" />
 
 
+    <CheckBox
+        android:id="@+id/checkLembrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lembrar Login"
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="416dp" />
+
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
