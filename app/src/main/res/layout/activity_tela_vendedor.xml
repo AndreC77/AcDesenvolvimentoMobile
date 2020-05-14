@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/telaMenuLateral1"
+    android:id="@+id/telaMenuLateral6"
     android:fitsSystemWindows="true">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".TelaSecundariaActivity">
+        tools:context=".TelaVendedorActivity">
         <include layout="@layout/toolbar" />
         <ScrollView
             android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/recyclerClientes"
+                android:id="@+id/recyclerVendedor"
                 android:cacheColorHint="@android:color/transparent"
                 android:clipToPadding="false"
                 android:divider="@null"
@@ -41,7 +41,5 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/menu_lateral_cabecalho"
         app:menu="@menu/menu_lateral" />
-
-
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -19,6 +19,7 @@ class MainActivity : DebugActivity() {
             var intent = Intent(this, TelaInicialActivity ::class.java)
             val nomeUsuario = usuario.text.toString()
             val senhaUsuario = senha.text.toString()
+
             progressBar.visibility = View.VISIBLE
 
             if(nomeUsuario == "aluno" && senhaUsuario == "impacta"){
@@ -26,11 +27,11 @@ class MainActivity : DebugActivity() {
                 startActivity(intent)
             }else {
                 Toast.makeText(this, "Usuario ou Senha Incorreto", Toast.LENGTH_SHORT).show()
+
             }
-
-
+            progressBar.visibility = View.INVISIBLE
         }
 
-
     }
+
 }

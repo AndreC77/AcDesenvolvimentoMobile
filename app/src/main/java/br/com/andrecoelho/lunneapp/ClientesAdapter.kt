@@ -16,14 +16,10 @@ class ClientesAdapter (
 
     class ClientesViewHolder(view: View): RecyclerView.ViewHolder(view){
         val cardNome: TextView
-        val cardImg: ImageView
-        val Progress: ProgressBar
         val cardView: CardView
 
         init {
             cardNome = view.findViewById(R.id.cardNome)
-            cardImg = view.findViewById(R.id.cardImage)
-            Progress = view.findViewById(R.id.cardProgress)
             cardView = view.findViewById(R.id.cardClientes)
         }
 
@@ -43,23 +39,9 @@ class ClientesAdapter (
 
         val cliente = clientes[position]
 
-        holder.cardNome.text = cliente.NomeCompleto
-        holder.Progress.visibility = View.VISIBLE
+        holder.cardNome.text = cliente.nomeCompleto
 
-        Picasso.with(context).load(cliente.foto).fit().into(
-            holder.cardImg,
-            object : com.squareup.picasso.Callback{
-                override fun onSuccess(){
-                    holder.Progress.visibility = View.GONE
-                }
-
-                override fun onError() {
-                    holder.Progress.visibility = View.GONE
-                }
-            }
-            )
-
-            holder.itemView.setOnClickListener{onClick(cliente)}
+        holder.itemView.setOnClickListener{onClick(cliente)}
     }
 
 }

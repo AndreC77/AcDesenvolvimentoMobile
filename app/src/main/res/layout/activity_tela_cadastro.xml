@@ -1,64 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--layout cadastro cor
     <TextView
         android:id="@+id/textInicial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cadastro de um novo cliente:" />
+        android:text="Cadastro de um nova cor:" />
 
     <TextView
-        android:id="@+id/textNome"
+        android:id="@+id/txtIdProduto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nome Completo:" />
+        android:text="Codigo:" />
 
     <EditText
-        android:id="@+id/editNome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
-    <TextView
-        android:id="@+id/textCpf"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="CPF:" />
-
-    <EditText
-        android:id="@+id/editCpf"
+        android:id="@+id/insertCodigoCor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number" />
 
     <TextView
-        android:id="@+id/textTelefone"
+        android:id="@+id/textDescricao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Telefone:" />
+        android:text="Descrição:" />
 
     <EditText
-        android:id="@+id/editTelefone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="phone" />
-
-    <TextView
-        android:id="@+id/textEndereco"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Endereço:" />
-
-    <EditText
-        android:id="@+id/editEndereco"
+        android:id="@+id/insertDescCor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName" />
 
-</LinearLayout>
+    <Button
+        android:id="@+id/buttonSalvarCor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="Salvar"
+        android:textColor="@color/branco" />
+    -->
+
+    <!--novo layout cadastro cor-->
+    <ImageView
+        android:id="@+id/imageViewPrincipal"
+        android:layout_width="236dp"
+        android:layout_height="108dp"
+        android:backgroundTint="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.101"
+        app:srcCompat="@drawable/logo"
+        android:contentDescription="TODO" />
+
+    <EditText
+        android:id="@+id/insertCodigoCor"
+        android:layout_width="360dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="27dp"
+        android:background="@drawable/bg_form_field_top"
+        android:ems="10"
+        android:hint="@string/code"
+        android:inputType="number"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewPrincipal"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/insertDescCor"
+        android:layout_width="360dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="360dp"
+        android:background="@drawable/bg_form_field_bottom"
+        android:ems="10"
+        android:hint="@string/descript"
+        android:inputType="textPersonName"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/insertCodigoCor"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonSalvarCor"
+        android:layout_width="128dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="260dp"
+        android:backgroundTint="#000000"
+        android:stateListAnimator="@null"
+        android:text="Salvar"
+        android:textColor="@color/branco"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/insertDescCor"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

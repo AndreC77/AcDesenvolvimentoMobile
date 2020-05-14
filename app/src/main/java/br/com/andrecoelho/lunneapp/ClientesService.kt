@@ -1,22 +1,43 @@
 package br.com.andrecoelho.lunneapp
 
 import android.content.Context
+import android.util.Log
+import br.com.fernandosousa.lmsapp.HttpHelper
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.net.URL
 
 object ClientesService {
 
-    fun getCliente(context: Context) :List<Clientes>{
+    val host = "http://192.168.100.8:8080"
+    val TAG = "WS_LMSApp"
 
-        val clientes = mutableListOf<Clientes>()
+    fun getCliente(context: Context): List<Clientes> {
 
-        for(i in 1..10){
-            val d = Clientes()
-            d.NomeCompleto = "Nome Completo $i"
-            d.RazaoSocial = "Razão Social $i"
-            d.RegistroFederal = "Registro Federal $i"
-            d.telefone = "Telefone $i"
-            d.foto = "https://www.pngfind.com/pngs/m/515-5153597_cliente-icon-png-customer-icon-vector-png-transparent.png"
-            clientes.add(d)
+        if(AndroidUtils.isInternetDisponivel(context)) {
+            val url = "$host/clientes"
+            val json = HttpHelper.get(url)
+
+            Log.d(TAG, json)
+
+            return parserJson<List<Clientes>>(json)
+        }else{
+            return ArrayList()
         }
-        return clientes
     }
+
+    fun delete(cliente: Clientes): Response {
+        Log.d(TAG, cliente.idCliente.toString())
+        val url = "$host/clientes/${cliente.idCliente}"
+        val json = HttpHelper.delete(url)
+        Log.d(TAG, json)
+        return parserJson(json)
+    }
+
+    inline fun <reified T> parserJson(json: String) : T {
+        val type = object : TypeToken<T>(){}.type
+        return Gson().fromJson<T>(json, type)
+
+    }
+
 }
