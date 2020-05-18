@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.anderson.bolsomovel">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
+    <application
+        android:name=".BolsomovelApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/lunne_import_round"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/lunne_import_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".TelaVendedor"
+            android:theme="@style/App.Theme.Toolbar"/>
+
+        <activity android:name=".DebugActivity"></activity>
+
+        <activity
+            android:name=".ProdutoActivity"
+            android:theme="@style/App.Theme.Toolbar"/>
+
+        <activity android:name=".ProdutoCadastroActivity"/>
+
+        <activity
+            android:name=".TelaInicial"
+            android:theme="@style/App.Theme.Toolbar"/>
+
+        <activity android:name=".MainActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
