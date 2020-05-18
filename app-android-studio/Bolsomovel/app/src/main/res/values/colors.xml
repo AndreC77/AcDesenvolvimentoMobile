@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#de4e52</color>
+
+    <!-- cor barra nome do app -->
+    <color name="colorPrimaryDark">#FF82AB</color>
+    <color name="colorAccent">#FEA8AB</color>
+
+    <!--Cor de background para EditText e Senha em foco.-->
+    <color name="colorFieldFocused">#FCF1F1</color>
+
+    <!--Cor de background da tela de proxy, quando os dados de formulário estão sendo enviados
+    ao back-end Web. -->
+    <color name="colorBackgroundProxy">#55FFFFFF</color>
+
+    <color name="colorViewLine">#FEA8AB</color>
+</resources>
