@@ -38,6 +38,14 @@ object VendedorService {
         return parserJson(json)
     }
 
+    fun senha(vendedor: Vendedor): Vendedor? {
+        val json = HttpHelper.post("${host}/vendedores/login", vendedor.toJson())
+        if (json == "vendedor não cadatrado" || json == "senha invalida"){
+            return null
+        }
+        return parserJson(json)
+    }
+
     inline fun <reified T> parserJson(json: String) : T {
         val type = object : TypeToken<T>(){}.type
         return Gson().fromJson<T>(json, type)

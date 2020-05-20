@@ -1,6 +1,7 @@
 package br.com.andrecoelho.lunneapp
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -11,6 +12,9 @@ import kotlinx.android.synthetic.main.activity_forma_de_pgto.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class FormaDePgtoActivity : AppCompatActivity() {
+
+    private var REQUEST_CADASTRO = 1
+    private var REQUEST_REMOVE = 2
 
     private val context: Context get() = this
     var formaDePgto: FormaDePagamento? = null
@@ -46,6 +50,7 @@ class FormaDePgtoActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val intent = Intent(this, CadastroFormaActivity::class.java)
         val id = item?.itemId
         if (id == android.R.id.home){
             finish()
@@ -60,6 +65,9 @@ class FormaDePgtoActivity : AppCompatActivity() {
                 }.setNegativeButton("Não") {
                         dialog, which -> dialog.dismiss()
                 }.create().show()
+        }else if(id == R.id.action_atualizar){
+            intent.putExtra("forma",formaDePgto)
+            startActivityForResult(intent, REQUEST_REMOVE)
         }
 
         return super.onOptionsItemSelected(item)

@@ -3,7 +3,7 @@ package br.com.andrecoelho.lunneapp
 import com.google.gson.GsonBuilder
 import java.io.Serializable
 
-class Clientes : Serializable{
+class Clientes : Serializable {
 
     var idCliente: Long = 0
     var codCliente: Long = 0
@@ -18,7 +18,7 @@ class Clientes : Serializable{
     var numeroCelular: String = ""
     var email: String = ""
     var observacao: String = ""
-    var endereco: String = ""
+    var enderecoEntity : Endereco? = null
 
     override fun toString(): String {
         return "Cliente: $nomeCompleto"

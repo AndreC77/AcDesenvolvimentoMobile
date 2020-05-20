@@ -1,6 +1,7 @@
 package br.com.andrecoelho.lunneapp
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -11,6 +12,9 @@ import kotlinx.android.synthetic.main.activity_produtos.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class ProdutosActivity : AppCompatActivity() {
+
+    private var REQUEST_CADASTRO = 1
+    private var REQUEST_REMOVE = 2
 
     private val context: Context get() = this
     var produto: Produtos? = null
@@ -52,6 +56,7 @@ class ProdutosActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val intent = Intent(this, CadastroProdutoActivity::class.java)
         val id = item?.itemId
         if (id == android.R.id.home){
             finish()
@@ -66,8 +71,10 @@ class ProdutosActivity : AppCompatActivity() {
                 }.setNegativeButton("Não") {
                         dialog, which -> dialog.dismiss()
                 }.create().show()
+        }else if(id == R.id.action_atualizar){
+            intent.putExtra("produto",produto)
+            startActivityForResult(intent, REQUEST_REMOVE)
         }
-
         return super.onOptionsItemSelected(item)
     }
 

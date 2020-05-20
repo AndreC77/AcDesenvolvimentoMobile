@@ -14,6 +14,8 @@ import java.lang.Long.parseLong
 
 class CadastroProdutoActivity : AppCompatActivity() {
 
+    var produto : Produtos? = null
+
     var par1 = arrayOf("UN", "PT","CX","MT","KG")
     var selecao1 = 0
 
@@ -24,7 +26,7 @@ class CadastroProdutoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro_produto)
 
-        var produto = Produtos()
+
 
         //spinners
         val spinner1 = this.findViewById<Spinner>(R.id.spinnerUndDesc)
@@ -52,7 +54,34 @@ class CadastroProdutoActivity : AppCompatActivity() {
             }
         }
 
+        //recuperar objeto
+        produto = intent.getSerializableExtra("produto") as? Produtos
+        if (produto != null) {
+
+            insertCodProduto1.setText(produto?.codProduto.toString())
+            insertCodEan.setText(produto?.codEan.toString())
+            insertReferencia.setText(produto?.ref.toString())
+            insertNcm.setText(produto?.ncm.toString())
+            insertCorProduto.setText(produto?.cor.toString())
+            insertDescReduzida.setText(produto?.descricaoReduzida.toString())
+            insertDesc.setText(produto?.descricao.toString())
+            insertDescUnid.setText(produto?.descricaoUnidadeVend.toString())
+            insertUnidade.setText(produto?.unidadeVenda.toString())
+            insertCusto.setText(produto?.custo.toString())
+            insertPreco.setText(produto?.preco.toString())
+            insertAltura.setText(produto?.altura.toString())
+            insertLargura.setText(produto?.largura.toString())
+            insertComprimento.setText(produto?.comprimento.toString())
+            insertPeso.setText(produto?.peso.toString())
+
+            supportActionBar?.title = "Editar Produto"
+        }else{
+            supportActionBar?.title = "Incluir Produto"
+        }
+
         buttonSalvarProduto.setOnClickListener {
+
+            var produto = Produtos()
 
             produto.codProduto = parseLong(insertCodProduto1.text.toString())
             produto.codEan = parseLong(insertCodEan.text.toString())
@@ -75,7 +104,6 @@ class CadastroProdutoActivity : AppCompatActivity() {
             taskAtualizar(produto)
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Incluir Produto"
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

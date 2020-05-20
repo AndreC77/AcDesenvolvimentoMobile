@@ -38,6 +38,11 @@ object CoresService {
         return parserJson(json)
     }
 
+    fun edit(cor: Cores): Response {
+        val json = HttpHelper.put("$host/cor/${cor.idCor}", cor.toJson())
+        return parserJson(json)
+    }
+
 
     inline fun <reified T> parserJson(json: String) : T {
         val type = object : TypeToken<T>(){}.type

@@ -2,20 +2,36 @@ package br.com.andrecoelho.lunneapp
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_tela_cadastro.*
-import kotlinx.android.synthetic.main.activity_tela_cadastro.view.*
 import java.lang.Long.parseLong
 
 class TelaCadastroActivity : DebugActivity() {
+
+    var cores: Cores? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tela_cadastro)
 
+        //recuperar objeto
+        cores = intent.getSerializableExtra("cor") as? Cores
+        if (cores != null) {
+            insertCodigoCor.setText(cores?.codCor.toString())
+            insertDescCor.setText(cores?.descricaoCor.toString())
+            buttonSalvarCor.setOnClickListener{
+                val cor = Cores()
+                cor.descricaoCor = insertDescCor.text.toString()
+                cor.codCor = parseLong(insertCodigoCor.text.toString())
+                //cor.codCor = 102
+                taskEditar(cor)
+            }
+            supportActionBar?.title = "Editar Cor"
+        }else{
+            supportActionBar?.title = "Incluir Cor"
+        }
+
         buttonSalvarCor.setOnClickListener{
             val cor = Cores()
-            cor.idCor = 0
             cor.descricaoCor = insertDescCor.text.toString()
             cor.codCor = parseLong(insertCodigoCor.text.toString())
             //cor.codCor = 102
@@ -23,7 +39,6 @@ class TelaCadastroActivity : DebugActivity() {
         }
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Incluir Cor"
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -38,6 +53,17 @@ class TelaCadastroActivity : DebugActivity() {
         // Thread para salvar a Cor
         Thread {
             CoresService.save(cores)
+            runOnUiThread {
+                // após cadastrar, voltar para activity anterior
+                finish()
+            }
+        }.start()
+    }
+
+    private fun taskEditar(cores: Cores) {
+        // Thread para salvar a Cor
+        Thread {
+            CoresService.edit(cores)
             runOnUiThread {
                 // após cadastrar, voltar para activity anterior
                 finish()

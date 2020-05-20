@@ -106,15 +106,6 @@ class TelaInicialActivity : DebugActivity() {
         var intent2 = Intent(this, TelaCadastroActivity ::class.java)
         val id = item.itemId
 
-        if(id == android.R.id.home){
-            finish()
-        }else if(id == R.id.action_config){
-            Toast.makeText(this, "Configurações", Toast.LENGTH_SHORT).show()
-            startActivity(intent)
-        }else if(id == R.id.action_adicionar){
-              Toast.makeText(this, "Incluir cliente", Toast.LENGTH_SHORT).show()
-              startActivity(intent2)
-        }
         return super.onOptionsItemSelected(item)
     }
 

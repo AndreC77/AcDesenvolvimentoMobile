@@ -49,34 +49,33 @@ class TelaClienteActivity : DebugActivity(), NavigationView.OnNavigationItemSele
     }
 
     fun taskClientes(){
-
         Thread {
             this.clientes = ClientesService.getCliente(context)
             runOnUiThread {
                 recyclerClientes?.adapter = ClientesAdapter(clientes) { onClikClientes(it) }
             }
-
         }.start()
     }
 
     fun onClikClientes(cliente: Clientes){
         Toast.makeText(context, "Clicou em ${cliente.nomeCompleto}", Toast.LENGTH_SHORT).show()
         val intent = Intent(context, ClientesActivity::class.java)
-        intent.putExtra("cliente",cliente)
+        intent.putExtra("cliente", cliente)
         startActivityForResult(intent, REQUEST_REMOVE)
 
 }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-
         menuInflater.inflate(R.menu.menu_main, menu)
-
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val intent = Intent(context, CadastroClienteActivity::class.java)
         val id = item?.itemId
-
+        if(id == R.id.action_adicionar){
+            startActivityForResult(intent, REQUEST_CADASTRO)
+        }
         return super.onOptionsItemSelected(item)
     }
 

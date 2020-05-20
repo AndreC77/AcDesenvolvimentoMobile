@@ -14,6 +14,9 @@ import kotlinx.android.synthetic.main.toolbar.*
 
 class CorActivity : AppCompatActivity() {
 
+    private var REQUEST_CADASTRO = 1
+    private var REQUEST_REMOVE = 2
+
     private val context: Context get() = this
     var cores: Cores? = null
 
@@ -64,7 +67,8 @@ class CorActivity : AppCompatActivity() {
                         dialog, which -> dialog.dismiss()
                 }.create().show()
         }else if(id == R.id.action_atualizar){
-            startActivity(intent)
+            intent.putExtra("cor",cores)
+            startActivityForResult(intent, REQUEST_REMOVE)
         }
         return super.onOptionsItemSelected(item)
     }

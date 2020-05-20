@@ -9,19 +9,29 @@ import java.lang.Long.parseLong
 
 class CadastroEstoqueActivity : AppCompatActivity() {
 
+    var estoque: Estoque? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro_estoque)
 
-        val estoque = Estoque()
+        //recuperar objeto
+        estoque = intent.getSerializableExtra("estoque") as? Estoque
+        if (estoque != null) {
+
+            insertCodEstoque.setText(estoque?.codProduto.toString())
+            supportActionBar?.title = "Editar Estoque"
+        }else{
+            supportActionBar?.title = "Incluir Estoque"
+        }
 
         buttonSalvarEstoque.setOnClickListener {
+            val estoque = Estoque()
             estoque.codProduto = parseLong(insertCodEstoque.text.toString())
             taskAtualizar(estoque)
         }
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Incluir Estoque"
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

@@ -7,90 +7,157 @@
     tools:context=".CadastroClienteActivity"
     android:orientation="vertical">
 
-    <!--codigo cliente
-    <TextView
-        android:id="@+id/txtNovoCliente"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Novo Cliente:" />
+        android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txtInsertCodigoCliente"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Codigo:" />
+            <EditText
+                android:id="@+id/insertCodCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Codigo" />
 
-    <EditText
-        android:id="@+id/insertCodCliente"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number" />
-    -->
+            <EditText
+                android:id="@+id/insertRegFederal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Registro Federal" />
 
-    <!--registro federal
-    <TextView
-        android:id="@+id/txtInsertRegsFederal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Registro Federal:" />
+            <EditText
+                android:id="@+id/insertInsEstadual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Ins. Estadual" />
 
-    <EditText
-        android:id="@+id/insertRegsFederal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
-    -->
+            <EditText
+                android:id="@+id/insertRazSocial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Razão Social" />
 
-    <!--novo cod cliente-->
+            <EditText
+                android:id="@+id/insertNomeFantazia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Nome Fantasia" />
 
-    <!--novo registro federal-->
+            <EditText
+                android:id="@+id/insertNomeComp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Nome Completo" />
 
-    <ImageView
-        android:id="@+id/imageViewPrincipal"
-        android:layout_width="236dp"
-        android:layout_height="108dp"
-        android:backgroundTint="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.101"
-        app:srcCompat="@drawable/logo"
-        android:contentDescription="TODO" />
+            <EditText
+                android:id="@+id/insertEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Email" />
 
-    <EditText
-        android:id="@+id/insertCodCliente"
-        android:layout_width="360dp"
-        android:layout_height="42dp"
-        android:background="@drawable/bg_form_field_top"
-        android:hint="@string/code"
-        android:inputType="number"
-        android:padding="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.381" />
+            <EditText
+                android:id="@+id/insertTelCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Telefone " />
 
-    <EditText
-        android:id="@+id/insertRegsFederal"
-        android:layout_width="360dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="24dp"
-        android:background="@drawable/bg_form_field_bottom"
-        android:hint="@string/register"
-        android:inputType="textPersonName"
-        android:padding="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.037"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.454" />
+            <EditText
+                android:id="@+id/insertCelCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Celular" />
+
+            <EditText
+                android:id="@+id/insertCep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Cep" />
+
+            <EditText
+                android:id="@+id/insertRua"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Rua" />
+
+            <EditText
+                android:id="@+id/insertNumCasa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Numero" />
+
+            <EditText
+                android:id="@+id/insertCompl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Nameomplemento" />
+
+            <EditText
+                android:id="@+id/insertBairro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Bairro" />
+
+            <EditText
+                android:id="@+id/insertMunic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Municipio" />
+
+            <EditText
+                android:id="@+id/insertUf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="UF" />
+
+            <EditText
+                android:id="@+id/insertIbge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="IBGE" />
+
+            <Button
+                android:id="@+id/salvarCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Salvar " />
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

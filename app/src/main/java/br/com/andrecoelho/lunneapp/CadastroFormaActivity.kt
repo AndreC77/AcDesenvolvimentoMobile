@@ -14,6 +14,8 @@ import java.lang.Long.parseLong
 
 class CadastroFormaActivity : DebugActivity() {
 
+    var forma: FormaDePagamento? = null
+
     var par1 = arrayOf(0, 15, 30, 45, 60, 75, 90, 105, 120)
     var selecao1 = 0
     var selecao2 = 0
@@ -26,8 +28,8 @@ class CadastroFormaActivity : DebugActivity() {
         super.onCreate(savedInstanceState)
         this.setContentView(R.layout.activity_cadastro_forma)
 
-        //Object
-        val forma = FormaDePagamento()
+
+
 
         //Spinners
         val spinnerP1 = this.findViewById<Spinner>(R.id.spinnerParcela1)
@@ -93,9 +95,22 @@ class CadastroFormaActivity : DebugActivity() {
             }
         }
 
+        //recuperar objeto
+        forma = intent.getSerializableExtra("forma") as? FormaDePagamento
+        if (forma != null) {
+            insertCodForma.setText(forma?.codigoFormaDePgto.toString())
+            insertDescricao.setText(forma?.descricaoFormaDePgto.toString())
+            supportActionBar?.title = "Editar Forma de Pagamento"
+        }else{
+            supportActionBar?.title = "Incluir Foma de Pagamento"
+        }
+
 
         //atribuicao
         buttonSalvarForma.setOnClickListener {
+
+            val forma = FormaDePagamento()
+
             forma.codigoFormaDePgto = parseLong(insertCodForma.text.toString())
             forma.descricaoFormaDePgto = insertDescricao.text.toString()
             forma.parcela1 = parseInt(spinnerP1.selectedItem.toString())
@@ -109,8 +124,6 @@ class CadastroFormaActivity : DebugActivity() {
         }
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Incluir Foma de Pagamento"
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

@@ -66,5 +66,41 @@
     <!--string telefone-->
     <string name="telephone">Telefone</string>
 
+    <!--string insEstadual-->
+    <string name="insEstadual">Inscrição estadual</string>
+
+    <!--string Razao Social-->
+    <string name="razaoSocial">Razão Social</string>
+
+    <!--string Nome Fantasia-->
+    <string name="nomeFantasia">Nome fantasia</string>
+
+    <!--string Nome Completo-->
+    <string name="nomeCompleto">Nome completo</string>
+
+    <!--string cep-->
+    <string name="cep">Cep</string>
+
+    <!--string Rua-->
+    <string name="rua">Rua</string>
+
+    <!--string Numero-->
+    <string name="Numero">Numero</string>
+
+    <!--string complemento-->
+    <string name="complemento">Complemento</string>
+
+    <!--string bairro-->
+    <string name="bairro">Bairro</string>
+
+    <!--string Municipio-->
+    <string name="municipio">Municipio</string>
+
+    <!--string uf-->
+    <string name="uf">UF</string>
+
+    <!--string ibge-->
+    <string name="ibge">IBGE</string>
+
 
 </resources>

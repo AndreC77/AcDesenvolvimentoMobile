@@ -5,38 +5,36 @@ import android.util.Log
 import br.com.fernandosousa.lmsapp.HttpHelper
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import java.net.URL
 
-object ClientesService {
+object EnderecoService {
 
     val host = "http://192.168.100.8:8080"
     val TAG = "WS_LMSApp"
 
-    fun getCliente(context: Context): List<Clientes> {
+    fun getEndereco(context: Context, cep : String): List<Endereco> {
 
         if(AndroidUtils.isInternetDisponivel(context)) {
-            val url = "$host/clientes"
+            val url = "http://viacep.com.br/ws/$cep/json/"
             val json = HttpHelper.get(url)
 
             Log.d(TAG, json)
 
-            return parserJson<List<Clientes>>(json)
+            return parserJson<List<Endereco>>(json)
         }else{
             return ArrayList()
         }
     }
 
-    fun save(cliente: Clientes): Response {
-        Log.d("Save", cliente.toJson())
-        val json = HttpHelper.post("$host/clientes", cliente.toJson())
+    fun delete(endereco: Endereco): Response {
+        Log.d(TAG, endereco.idEndereco.toString())
+        val url = "${host}/enderecos/${endereco.idEndereco}"
+        val json = HttpHelper.delete(url)
+        Log.d(TAG, json)
         return parserJson(json)
     }
 
-    fun delete(cliente: Clientes): Response {
-        Log.d("DEL", cliente.idCliente.toString())
-        val url = "$host/clientes/${cliente.idCliente}"
-        val json = HttpHelper.delete(url)
-        Log.d("DEL", json)
+    fun save(endereco: Endereco): Response {
+        val json = HttpHelper.post("$host/enderecos", endereco.toJson())
         return parserJson(json)
     }
 
