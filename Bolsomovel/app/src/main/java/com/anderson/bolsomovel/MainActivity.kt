@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         /*novo login*/
         var contains: Boolean = false
 
-        for (v in this.vendedores) {
+        for (v in vendedores) {
             if (nameUser == v.nome && passwordUser == v.senha) {
                 Toast.makeText(this, "Bem vindo usuário: $nameUser!", Toast.LENGTH_SHORT).show()
                 progressBar.visibility = View.INVISIBLE
@@ -70,7 +70,6 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Usuário ou Senha incorreto!", Toast.LENGTH_SHORT).show()
             progressBar.visibility = View.INVISIBLE
         }
-
 
 
         /*login padrao
@@ -90,9 +89,7 @@ class MainActivity : AppCompatActivity() {
     private val vendedor = taskVendedores()
 
     fun taskVendedores() {
-        Thread {
-            vendedores = VendedorService.getVendedores(context)
-        }
+        Thread {vendedores = VendedorService.getVendedores(context)}.start()
     }
 }
 
