@@ -38,6 +38,12 @@ object VendedorService {
         return parserJson(json)
     }
 
+    fun edit(vendedor: Vendedor): Response {
+        Log.d(TAG, vendedor.toJson())
+        val json = HttpHelper.put("$host/vendedores/${vendedor.id}", vendedor.toJson())
+        return parserJson(json)
+    }
+
     fun senha(vendedor: Vendedor): Vendedor? {
         val json = HttpHelper.post("${host}/vendedores/login", vendedor.toJson())
         if (json == "vendedor não cadatrado" || json == "senha invalida"){

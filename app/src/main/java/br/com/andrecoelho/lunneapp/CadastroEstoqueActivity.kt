@@ -1,5 +1,6 @@
 package br.com.andrecoelho.lunneapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -20,17 +21,28 @@ class CadastroEstoqueActivity : AppCompatActivity() {
         if (estoque != null) {
 
             insertCodEstoque.setText(estoque?.codProduto.toString())
+            insertQtdEstoque.setText(estoque?.qtdEstoque.toString())
+
+            buttonSalvarEstoque.setOnClickListener {
+
+                estoque?.codProduto = parseLong(insertCodEstoque.text.toString())
+                estoque?.qtdEstoque = parseLong(insertQtdEstoque.text.toString())
+
+                taskPut(estoque!!)
+            }
             supportActionBar?.title = "Editar Estoque"
         }else{
+
+            buttonSalvarEstoque.setOnClickListener {
+
+                val estoque = Estoque()
+                estoque.codProduto = parseLong(insertCodEstoque.text.toString())
+                estoque.qtdEstoque = parseLong(insertQtdEstoque.text.toString())
+
+                taskAtualizar(estoque)
+            }
             supportActionBar?.title = "Incluir Estoque"
         }
-
-        buttonSalvarEstoque.setOnClickListener {
-            val estoque = Estoque()
-            estoque.codProduto = parseLong(insertCodEstoque.text.toString())
-            taskAtualizar(estoque)
-        }
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
@@ -43,11 +55,24 @@ class CadastroEstoqueActivity : AppCompatActivity() {
     }
 
     private fun taskAtualizar(estoque: Estoque) {
-        // Thread para salvar a Cor
+        // Thread para salvar a estoque
         Thread {
             EstoqueService.save(estoque)
             runOnUiThread {
                 // após cadastrar, voltar para activity anterior
+                finish()
+            }
+        }.start()
+    }
+
+    private fun taskPut(estoque: Estoque) {
+        //Thred para Atualizar a Estoque
+        Thread {
+            EstoqueService.edit(estoque)
+            runOnUiThread {
+                // após cadastrar, voltar para Tela de Estoques
+                intent = Intent(this, TelaEstoqueActivity::class.java)
+                startActivity(intent)
                 finish()
             }
         }.start()

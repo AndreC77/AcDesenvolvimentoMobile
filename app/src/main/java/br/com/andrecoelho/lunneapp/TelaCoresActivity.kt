@@ -132,6 +132,4 @@ class TelaCoresActivity : DebugActivity(), NavigationView.OnNavigationItemSelect
             taskCores()
         }
     }
-
-
 }

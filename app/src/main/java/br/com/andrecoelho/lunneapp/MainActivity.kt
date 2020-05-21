@@ -13,47 +13,66 @@ import kotlin.reflect.typeOf
 
 class MainActivity : DebugActivity() {
 
-    private var resposta : Vendedor? = null
+    private var resposta: Vendedor? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
 
-        //imageViewPrincipal.setImageResource(R.drawable.logo)
-
-        buttonLogin.setOnClickListener {
-
-            var vendedor = Vendedor()
-
-
-            var intent = Intent(this, TelaInicialActivity::class.java)
-            val nomeUsuario = usuario.text.toString()
-            val senhaUsuario = senha.text.toString()
-
-            //enviar Parametros preciso para POST SENHA
-            vendedor.emailVendedor = nomeUsuario
-            vendedor.senha = senhaUsuario
-
-            progressBar.visibility = View.VISIBLE
-
-            //POST  de Senha
-            Thread {
-                 resposta = VendedorService.senha(vendedor)
-            }.start()
-            resposta?.toJson()
-
-            var name = resposta?.nome.toString()
-
-            //Vlidacao do Login
-            if(resposta != null){
-                Toast.makeText(this, "Bem vindo Usuario: $name ", Toast.LENGTH_SHORT).show()
-                startActivity(intent)
-            }else {
-                Toast.makeText(this, "Usuario ou Senha Incorreto", Toast.LENGTH_SHORT).show()
-                }
-            progressBar.visibility = View.INVISIBLE
-            }
+        var lembrar = Prefs.getBoolean("lembrar")
+        if (lembrar){
+            var lembrarNome = Prefs.getString("lembrarNome")
+            var lembrarSenha = Prefs.getString("lembrarSenha")
+            usuario.setText(lembrarNome)
+            senha.setText(lembrarSenha)
+            checkBoxLogin.isChecked = lembrar
         }
+
+        buttonLogin.setOnClickListener {onClick()}
     }
 
+    fun onClick(){
+
+        var vendedor = Vendedor()
+
+        var intent = Intent(this, TelaInicialActivity::class.java)
+        val nomeUsuario = usuario.text.toString()
+        val senhaUsuario = senha.text.toString()
+
+        progressBar.visibility = View.VISIBLE
+
+        //enviar Parametros preciso para POST SENHA
+        vendedor.emailVendedor = nomeUsuario
+        vendedor.senha = senhaUsuario
+
+        //armazenar valor do checkbox
+        Prefs.setBoolean("lembrar", checkBoxLogin.isChecked)
+
+        //Verificar se é para lembrar nome e senha
+        if(checkBoxLogin.isChecked){
+            Prefs.setString("lembrarNome", nomeUsuario)
+            Prefs.setString("lembrarSenha", senhaUsuario)
+        }else{
+            Prefs.setString("lembrarNome", "")
+            Prefs.setString("lembrarSenha", "")
+        }
+
+        //POST  de Senha
+        Thread {
+            resposta = VendedorService.senha(vendedor)
+        }.start()
+        resposta?.toJson()
+
+        var name = resposta?.nome.toString()
+
+        //Validacao do Login
+        if(resposta != null){
+            Toast.makeText(this, "Bem vindo Usuario: $name ", Toast.LENGTH_SHORT).show()
+            startActivity(intent)
+        }else {
+            Toast.makeText(this, "Usuario ou Senha Incorreto", Toast.LENGTH_SHORT).show()
+        }
+        progressBar.visibility = View.INVISIBLE
+    }
+}

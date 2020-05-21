@@ -38,6 +38,12 @@ object EstoqueService {
         return parserJson(json)
     }
 
+    fun edit(estoque: Estoque): Response {
+        Log.d(TAG, estoque.toJson())
+        val json = HttpHelper.put("$host/estoque/${estoque.idEstoque}", estoque.toJson())
+        return parserJson(json)
+    }
+
     inline fun <reified T> parserJson(json: String) : T {
         val type = object : TypeToken<T>(){}.type
         return Gson().fromJson<T>(json, type)

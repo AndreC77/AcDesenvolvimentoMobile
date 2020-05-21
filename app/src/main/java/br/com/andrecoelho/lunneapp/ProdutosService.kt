@@ -37,6 +37,12 @@ object ProdutosService {
         return parserJson(json)
     }
 
+    fun edit(produto: Produtos): Response {
+        Log.d(TAG, produto.toJson())
+        val json = HttpHelper.put("$host/produtos/${produto.idProduto}", produto.toJson())
+        return parserJson(json)
+    }
+
     inline fun <reified T> parserJson(json: String) : T {
         val type = object : TypeToken<T>(){}.type
         return Gson().fromJson<T>(json, type)

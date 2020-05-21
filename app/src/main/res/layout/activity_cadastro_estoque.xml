@@ -78,6 +78,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.381" />
 
+
+    <EditText
+        android:id="@+id/insertQtdEstoque"
+        android:layout_width="360dp"
+        android:layout_height="42dp"
+        android:background="@drawable/bg_form_field_sqr2"
+        android:hint="Estoque"
+        android:inputType="number"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/insertCodEstoque" />
+
     <Button
         android:id="@+id/buttonSalvarEstoque"
         android:layout_width="350dp"
@@ -89,8 +103,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/insertCodEstoque"
-        app:layout_constraintVertical_bias="0.03000000" />
+        app:layout_constraintTop_toBottomOf="@+id/insertQtdEstoque"
+        app:layout_constraintVertical_bias="0.062" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

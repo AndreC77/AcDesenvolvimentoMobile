@@ -1,11 +1,16 @@
 package br.com.andrecoelho.lunneapp
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.GsonBuilder
 import java.io.Serializable
 
+@Entity(tableName = "endereco")
 class Endereco : Serializable {
 
+    @PrimaryKey
     var idEndereco : Long = 0
+
     var cep : String = ""
     var logradouro : String = ""
     var complemento : String = ""

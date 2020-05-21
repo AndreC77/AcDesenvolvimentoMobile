@@ -1,5 +1,6 @@
 package br.com.andrecoelho.lunneapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -74,34 +75,55 @@ class CadastroProdutoActivity : AppCompatActivity() {
             insertComprimento.setText(produto?.comprimento.toString())
             insertPeso.setText(produto?.peso.toString())
 
+            buttonSalvarProduto.setOnClickListener {
+
+                produto?.codProduto = parseLong(insertCodProduto1.text.toString())
+                produto?.codEan = parseLong(insertCodEan.text.toString())
+                produto?.ref = insertReferencia.text.toString()
+                produto?.ncm = insertNcm.text.toString()
+                produto?.cor = insertCorProduto.text.toString()
+                produto?.descricaoReduzida = insertDescReduzida.text.toString()
+                produto?.descricao = insertDesc.text.toString()
+                produto?.gradeVenda = spinnerUndDesc.selectedItem.toString()
+                produto?.descricaoUnidadeVend = insertDescUnid.text.toString()
+                produto?.unidadeVenda = insertUnidade.text.toString()
+                produto?.origem = parseInt(spinnerOrigem.selectedItem.toString())
+                produto?.custo = parseFloat(insertCusto.text.toString())
+                produto?.preco = parseFloat(insertPreco.text.toString())
+                produto?.altura = parseFloat(insertAltura.text.toString())
+                produto?.largura = parseFloat(insertLargura.text.toString())
+                produto?.comprimento = parseFloat(insertComprimento.text.toString())
+                produto?.peso = parseFloat(insertPeso.text.toString())
+
+                taskPut(produto!!)
+            }
             supportActionBar?.title = "Editar Produto"
         }else{
+            buttonSalvarProduto.setOnClickListener {
+
+                var produto = Produtos()
+
+                produto.codProduto = parseLong(insertCodProduto1.text.toString())
+                produto.codEan = parseLong(insertCodEan.text.toString())
+                produto.ref = insertReferencia.text.toString()
+                produto.ncm = insertNcm.text.toString()
+                produto.cor = insertCorProduto.text.toString()
+                produto.descricaoReduzida = insertDescReduzida.text.toString()
+                produto.descricao = insertDesc.text.toString()
+                produto.gradeVenda = spinnerUndDesc.selectedItem.toString()
+                produto.descricaoUnidadeVend = insertDescUnid.text.toString()
+                produto.unidadeVenda = insertUnidade.text.toString()
+                produto.origem = parseInt(spinnerOrigem.selectedItem.toString())
+                produto.custo = parseFloat(insertCusto.text.toString())
+                produto.preco = parseFloat(insertPreco.text.toString())
+                produto.altura = parseFloat(insertAltura.text.toString())
+                produto.largura = parseFloat(insertLargura.text.toString())
+                produto.comprimento = parseFloat(insertComprimento.text.toString())
+                produto.peso = parseFloat(insertPeso.text.toString())
+
+                taskAtualizar(produto)
+            }
             supportActionBar?.title = "Incluir Produto"
-        }
-
-        buttonSalvarProduto.setOnClickListener {
-
-            var produto = Produtos()
-
-            produto.codProduto = parseLong(insertCodProduto1.text.toString())
-            produto.codEan = parseLong(insertCodEan.text.toString())
-            produto.ref = insertReferencia.text.toString()
-            produto.ncm = insertNcm.text.toString()
-            produto.cor = insertCorProduto.text.toString()
-            produto.descricaoReduzida = insertDescReduzida.text.toString()
-            produto.descricao = insertDesc.text.toString()
-            produto.gradeVenda = spinnerUndDesc.selectedItem.toString()
-            produto.descricaoUnidadeVend = insertDescUnid.text.toString()
-            produto.unidadeVenda = insertUnidade.text.toString()
-            produto.origem = parseInt(spinnerOrigem.selectedItem.toString())
-            produto.custo = parseFloat(insertCusto.text.toString())
-            produto.preco = parseFloat(insertPreco.text.toString())
-            produto.altura = parseFloat(insertAltura.text.toString())
-            produto.largura = parseFloat(insertLargura.text.toString())
-            produto.comprimento = parseFloat(insertComprimento.text.toString())
-            produto.peso = parseFloat(insertPeso.text.toString())
-
-            taskAtualizar(produto)
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
@@ -120,6 +142,19 @@ class CadastroProdutoActivity : AppCompatActivity() {
             ProdutosService.save(produtos)
             runOnUiThread {
                 // após cadastrar, voltar para activity anterior
+                finish()
+            }
+        }.start()
+    }
+
+    private fun taskPut(produtos: Produtos) {
+        //Thred para Atualizar a Produto
+        Thread {
+            ProdutosService.edit(produtos)
+            runOnUiThread {
+                // após cadastrar, voltar para Tela de Produtos
+                intent = Intent(this, TelaProdutosActivity::class.java)
+                startActivity(intent)
                 finish()
             }
         }.start()

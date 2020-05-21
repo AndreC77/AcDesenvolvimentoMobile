@@ -1,5 +1,6 @@
 package br.com.andrecoelho.lunneapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -27,9 +28,6 @@ class CadastroFormaActivity : DebugActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.setContentView(R.layout.activity_cadastro_forma)
-
-
-
 
         //Spinners
         val spinnerP1 = this.findViewById<Spinner>(R.id.spinnerParcela1)
@@ -98,31 +96,43 @@ class CadastroFormaActivity : DebugActivity() {
         //recuperar objeto
         forma = intent.getSerializableExtra("forma") as? FormaDePagamento
         if (forma != null) {
+
             insertCodForma.setText(forma?.codigoFormaDePgto.toString())
             insertDescricao.setText(forma?.descricaoFormaDePgto.toString())
+
+            buttonSalvarForma.setOnClickListener {
+
+                forma?.codigoFormaDePgto = parseLong(insertCodForma.text.toString())
+                forma?.descricaoFormaDePgto = insertDescricao.text.toString()
+                forma?.parcela1 = parseInt(spinnerP1.selectedItem.toString())
+                forma?.parcela2 = parseInt(spinnerP2.selectedItem.toString())
+                forma?.parcela3 = parseInt(spinnerP3.selectedItem.toString())
+                forma?.parcela4 = parseInt(spinnerP4.selectedItem.toString())
+                forma?.parcela5 = parseInt(spinnerP5.selectedItem.toString())
+                forma?.parcela6 = parseInt(spinnerP6.selectedItem.toString())
+
+                taskPut(forma!!)
+            }
             supportActionBar?.title = "Editar Forma de Pagamento"
         }else{
+            //atribuicao
+            buttonSalvarForma.setOnClickListener {
+
+                val forma = FormaDePagamento()
+
+                forma.codigoFormaDePgto = parseLong(insertCodForma.text.toString())
+                forma.descricaoFormaDePgto = insertDescricao.text.toString()
+                forma.parcela1 = parseInt(spinnerP1.selectedItem.toString())
+                forma.parcela2 = parseInt(spinnerP2.selectedItem.toString())
+                forma.parcela3 = parseInt(spinnerP3.selectedItem.toString())
+                forma.parcela4 = parseInt(spinnerP4.selectedItem.toString())
+                forma.parcela5 = parseInt(spinnerP5.selectedItem.toString())
+                forma.parcela6 = parseInt(spinnerP6.selectedItem.toString())
+
+                taskAtualizar(forma)
+            }
             supportActionBar?.title = "Incluir Foma de Pagamento"
         }
-
-
-        //atribuicao
-        buttonSalvarForma.setOnClickListener {
-
-            val forma = FormaDePagamento()
-
-            forma.codigoFormaDePgto = parseLong(insertCodForma.text.toString())
-            forma.descricaoFormaDePgto = insertDescricao.text.toString()
-            forma.parcela1 = parseInt(spinnerP1.selectedItem.toString())
-            forma.parcela2 = parseInt(spinnerP2.selectedItem.toString())
-            forma.parcela3 = parseInt(spinnerP3.selectedItem.toString())
-            forma.parcela4 = parseInt(spinnerP4.selectedItem.toString())
-            forma.parcela5 = parseInt(spinnerP5.selectedItem.toString())
-            forma.parcela6 = parseInt(spinnerP6.selectedItem.toString())
-
-            taskAtualizar(forma)
-        }
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
@@ -136,11 +146,24 @@ class CadastroFormaActivity : DebugActivity() {
     }
 
     private fun taskAtualizar(forma: FormaDePagamento) {
-        // Thread para salvar a Cor
+        // Thread para salvar a forma
         Thread {
             FormaDePgtoService.save(forma)
             runOnUiThread {
                 // após cadastrar, voltar para activity anterior
+                finish()
+            }
+        }.start()
+    }
+
+    private fun taskPut(forma: FormaDePagamento) {
+        //Thred para Atualizar a forma
+        Thread {
+            FormaDePgtoService.edit(forma)
+            runOnUiThread {
+                // após cadastrar, voltar para Tela de Cores
+                intent = Intent(this, TelaFormaDePgtoActivity::class.java)
+                startActivity(intent)
                 finish()
             }
         }.start()

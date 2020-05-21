@@ -39,6 +39,12 @@ object FormaDePgtoService {
         return parserJson(json)
     }
 
+    fun edit(forma: FormaDePagamento): Response {
+        Log.d(TAG, forma.toJson())
+        val json = HttpHelper.put("$host/formadepagamento/${forma.idFormaDePgto}", forma.toJson())
+        return parserJson(json)
+    }
+
     inline fun <reified T> parserJson(json: String) : T {
         val type = object : TypeToken<T>(){}.type
         return Gson().fromJson<T>(json, type)

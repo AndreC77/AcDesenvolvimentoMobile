@@ -39,6 +39,7 @@ object CoresService {
     }
 
     fun edit(cor: Cores): Response {
+        Log.d(TAG, cor.toJson())
         val json = HttpHelper.put("$host/cor/${cor.idCor}", cor.toJson())
         return parserJson(json)
     }

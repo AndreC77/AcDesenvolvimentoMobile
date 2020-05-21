@@ -1,11 +1,16 @@
 package br.com.andrecoelho.lunneapp
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.GsonBuilder
 import java.io.Serializable
 
+@Entity(tableName = "produtos")
 class Produtos : Serializable{
 
+    @PrimaryKey
     var idProduto : Long = 0
+
     var codEan : Long = 0
     var codProduto : Long = 0
     var ref :  String = ""

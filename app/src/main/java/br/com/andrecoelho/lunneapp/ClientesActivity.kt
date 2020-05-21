@@ -1,6 +1,7 @@
 package br.com.andrecoelho.lunneapp
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,6 +11,8 @@ import kotlinx.android.synthetic.main.toolbar.*
 
 class ClientesActivity : DebugActivity() {
 
+    private var REQUEST_CADASTRO = 1
+    private var REQUEST_REMOVE = 2
      private val context: Context get() = this
      var cliente: Clientes? = null
 
@@ -47,10 +50,11 @@ class ClientesActivity : DebugActivity() {
 
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-       val id = item?.itemId
-       if (id == android.R.id.home){
+        val intent = Intent(this, CadastroClienteActivity::class.java)
+        val id = item?.itemId
+        if (id == android.R.id.home){
             finish()
-       }else if(id == R.id.action_remover){
+        }else if(id == R.id.action_remover){
            // alerta para confirmar a remeção
            // só remove se houver confirmação positiva
            AlertDialog.Builder(this).setTitle(R.string.app_name).setMessage("Deseja excluir Cliente?")
@@ -61,6 +65,9 @@ class ClientesActivity : DebugActivity() {
                }.setNegativeButton("Não") {
                        dialog, which -> dialog.dismiss()
                }.create().show()
+        }else if(id == R.id.action_atualizar){
+           intent.putExtra("clientes",cliente)
+           startActivityForResult(intent, REQUEST_REMOVE)
        }
 
         return super.onOptionsItemSelected(item)

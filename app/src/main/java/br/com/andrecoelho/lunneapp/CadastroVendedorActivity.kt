@@ -1,5 +1,6 @@
 package br.com.andrecoelho.lunneapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -25,6 +26,7 @@ class CadastroVendedorActivity : DebugActivity() {
         val spinnerV = this.findViewById<Spinner>(R.id.spinnerFuncionario)
         //Adapter
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, this.par1)
+
         spinnerV.adapter = adapter
         spinnerV.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -44,23 +46,34 @@ class CadastroVendedorActivity : DebugActivity() {
             insertCelVendedor.setText(vendedor?.celular.toString())
             insertCodVendedor.setText(vendedor?.codVendedor.toString())
 
+            buttonSalvarVendedor.setOnClickListener {
+
+                vendedor?.nome = insertNomeVendedor.text.toString()
+                vendedor?.emailVendedor = insertEmailVendedor.text.toString()
+                vendedor?.senha = insertSenhaVendedor.text.toString()
+                vendedor?.telefone = insertTelVendedor.text.toString()
+                vendedor?.celular = insertCelVendedor.text.toString()
+                vendedor?.codVendedor = parseLong(insertCodVendedor.text.toString())
+                vendedor?.funcionario = spinnerV.selectedItem.toString()
+                taskPut(vendedor!!)
+            }
             supportActionBar?.title = "Editar Vendedor"
         }else{
+
+            buttonSalvarVendedor.setOnClickListener {
+
+                var vendedor = Vendedor()
+                vendedor.nome = insertNomeVendedor.text.toString()
+                vendedor.emailVendedor = insertEmailVendedor.text.toString()
+                vendedor.senha = insertSenhaVendedor.text.toString()
+                vendedor.telefone = insertTelVendedor.text.toString()
+                vendedor.celular = insertCelVendedor.text.toString()
+                vendedor.codVendedor = parseLong(insertCodVendedor.text.toString())
+                vendedor.funcionario = spinnerV.selectedItem.toString()
+
+                taskAtualizar(vendedor)
+            }
             supportActionBar?.title = "Incluir Vendedor"
-        }
-
-        buttonSalvarVendedor.setOnClickListener {
-
-            var vendedor = Vendedor()
-
-            vendedor.nome = insertNomeVendedor.text.toString()
-            vendedor.emailVendedor = insertEmailVendedor.text.toString()
-            vendedor.senha = insertSenhaVendedor.text.toString()
-            vendedor.telefone = insertTelVendedor.text.toString()
-            vendedor.celular = insertCelVendedor.text.toString()
-            vendedor.codVendedor = parseLong(insertCodVendedor.text.toString())
-            vendedor.funcionario = spinnerV.selectedItem.toString()
-            taskAtualizar(vendedor)
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
@@ -79,6 +92,19 @@ class CadastroVendedorActivity : DebugActivity() {
             VendedorService.save(vendedor)
             runOnUiThread {
                 // após cadastrar, voltar para activity anterior
+                finish()
+            }
+        }.start()
+    }
+
+    private fun taskPut(vendedor: Vendedor) {
+        //Thred para Atualizar o Vendedor
+        Thread {
+            VendedorService.edit(vendedor)
+            runOnUiThread {
+                // após cadastrar, voltar para Tela de Vendedores
+                intent = Intent(this, TelaVendedorActivity::class.java)
+                startActivity(intent)
                 finish()
             }
         }.start()

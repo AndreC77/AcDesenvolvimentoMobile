@@ -1,11 +1,16 @@
 package br.com.andrecoelho.lunneapp
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.GsonBuilder
 import java.io.Serializable
 
+@Entity(tableName = "clientes")
 class Clientes : Serializable {
 
+    @PrimaryKey
     var idCliente: Long = 0
+
     var codCliente: Long = 0
     var registroFederal: String = ""
     var pessoaJuridica: Boolean = false
