@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Bolsomovel</string>
+    <string name="image">Logo Lunne</string>
+    <string name="user">Usuário</string>
+    <string name="password">Digite sua senha</string>
+    <string name="login">Login</string>
+    <string name="invalid_password">Mínimo de 6 caracteres.</string>
+
+    //cadastro de produto
+    <string name="produto">Produto</string>
+    <string name="foto">Foto</string>
+    <string name="qtd">Quantidade</string>
+    <string name="salvar">Salvar</string>
+
+    //card view
+    <string name="nav_open">Abrir</string>
+    <string name="nav_close">Fechar</string>
+
+    //credenciais google maps
+    <string name="API_KEY">AIzaSyBCdg3sIi2l8wpl7pccViALxTauWMms1Q4</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
