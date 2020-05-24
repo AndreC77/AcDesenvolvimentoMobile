@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- drawable utilizado quando a view alvo esta com foco -->
+    <item
+        android:state_focused="true"
+        android:drawable="@drawable/bg_form_field_square_focused" />
+
+    <!-- drawable utilizado quando a View alvo nao esta com foco -->
+    <item
+        android:drawable="@drawable/bg_form_field_square" />
+
+</selector>

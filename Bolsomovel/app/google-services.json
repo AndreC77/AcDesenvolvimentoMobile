@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "527728659026",
+    "firebase_url": "https://bolsomovel.firebaseio.com",
+    "project_id": "bolsomovel",
+    "storage_bucket": "bolsomovel.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527728659026:android:79348f84935a6630baad8b",
+        "android_client_info": {
+          "package_name": "com.anderson.bolsomovel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527728659026-hpdfcjho77pq8011oblt20itpu0kdcj0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk99Rse6CREJ-dZYcEIzHokIMpafWRT5A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527728659026-hpdfcjho77pq8011oblt20itpu0kdcj0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

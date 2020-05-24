@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_novo_produto"
+            android:icon="@drawable/ic_adicionar_black"
+            android:title="Novo produto"/>
+
+        <item
+            android:id="@+id/nav_maps_locazacao"
+            android:icon="@drawable/ic_local_black"
+            android:title="Localização"/>
+
+
+
+    </group>
+
+</menu>
