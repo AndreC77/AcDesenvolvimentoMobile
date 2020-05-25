@@ -5,10 +5,10 @@ import androidx.room.PrimaryKey
 import com.google.gson.GsonBuilder
 import java.io.Serializable
 
-@Entity(tableName = "clientes")
+//@Entity(tableName = "clientes")
 class Clientes : Serializable {
 
-    @PrimaryKey
+    //@PrimaryKey
     var idCliente: Long = 0
 
     var codCliente: Long = 0

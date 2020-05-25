@@ -12,30 +12,53 @@ object EnderecoService {
     val TAG = "WS_LMSApp"
 
     fun getEndereco(context: Context, cep : String): List<Endereco> {
-
+        var enderecos = ArrayList<Endereco>()
         if(AndroidUtils.isInternetDisponivel(context)) {
             val url = "http://viacep.com.br/ws/$cep/json/"
             val json = HttpHelper.get(url)
-
-            Log.d(TAG, json)
-
-            return parserJson<List<Endereco>>(json)
+            enderecos = parserJson(json)
+            //salvar offline
+            for (e in enderecos){
+                saveOffiline(e)
+            }
+            return enderecos
         }else{
-            return ArrayList()
+            val dao = DatabaseManager.getEnderecoDAO()
+            val enderecos = dao.findAll()
+            return enderecos
         }
     }
 
     fun delete(endereco: Endereco): Response {
-        Log.d(TAG, endereco.idEndereco.toString())
-        val url = "${host}/enderecos/${endereco.idEndereco}"
-        val json = HttpHelper.delete(url)
-        Log.d(TAG, json)
-        return parserJson(json)
+        if(AndroidUtils.isInternetDisponivel(MaisVendasApplication.getInstance().applicationContext)) {
+            val url = "${host}/enderecos/${endereco.idEndereco}"
+            val json = HttpHelper.delete(url)
+            return parserJson(json)
+        }else{
+            val dao = DatabaseManager.getEnderecoDAO()
+            dao.delete(endereco)
+            return Response(status = "OK", msg = "Dados Salvos Localmente")
+        }
     }
 
     fun save(endereco: Endereco): Response {
         val json = HttpHelper.post("$host/enderecos", endereco.toJson())
         return parserJson(json)
+    }
+
+    //Salvar Offline
+    fun saveOffiline(endereco: Endereco) : Boolean {
+        val dao = DatabaseManager.getEnderecoDAO()
+        if (! existeEndereco(endereco)){
+            dao.insert(endereco)
+        }
+        return true
+    }
+
+    //Verificar se Ja existe O Cliente
+    fun existeEndereco(endereco: Endereco) : Boolean {
+        val dao = DatabaseManager.getEnderecoDAO()
+        return dao.getById(endereco.idEndereco) != null
     }
 
     inline fun <reified T> parserJson(json: String) : T {

@@ -12,25 +12,34 @@ object EstoqueService {
     val TAG = "WS_LMSApp"
 
     fun getEstoque(context: Context): List<Estoque> {
-
+        var estoques = ArrayList<Estoque>()
         if(AndroidUtils.isInternetDisponivel(context)) {
             val url = "${host}/estoque"
             val json = HttpHelper.get(url)
-
-            Log.d(TAG, json)
-
-            return parserJson<List<Estoque>>(json)
+            estoques = parserJson(json)
+            //salvar offline
+            for (e in estoques){
+                saveOffline(e)
+            }
+            return estoques
         }else{
-            return ArrayList()
+            val dao = DatabaseManager.getEstoqueDAO()
+            val estoque = dao.findAll()
+            return estoque
         }
     }
 
     fun delete(estoque: Estoque): Response {
         Log.d(TAG, estoque.idEstoque.toString())
-        val url = "${host}/estoque/${estoque.idEstoque}"
-        val json = HttpHelper.delete(url)
-        Log.d(TAG, json)
-        return parserJson(json)
+        if(AndroidUtils.isInternetDisponivel(MaisVendasApplication.getInstance().applicationContext)){
+            val url = "${host}/estoque/${estoque.idEstoque}"
+            val json = HttpHelper.delete(url)
+            return parserJson(json)
+        }else{
+            val dao = DatabaseManager.getEstoqueDAO()
+            dao.delete(estoque)
+            return Response(status = "OK", msg = "Dados Salvos Localmente")
+        }
     }
 
     fun save(estoque: Estoque): Response {
@@ -42,6 +51,21 @@ object EstoqueService {
         Log.d(TAG, estoque.toJson())
         val json = HttpHelper.put("$host/estoque/${estoque.idEstoque}", estoque.toJson())
         return parserJson(json)
+    }
+
+    //Salvar Offline
+    fun saveOffline(estoque: Estoque) : Boolean {
+        val dao = DatabaseManager.getEstoqueDAO()
+        if (! existeEstoque(estoque)){
+            dao.insert(estoque)
+        }
+        return true
+    }
+
+    //Verificar se Ja existe O Cliente
+    fun existeEstoque(estoque: Estoque) : Boolean {
+        val dao = DatabaseManager.getEstoqueDAO()
+        return dao.getById(estoque.idEstoque) != null
     }
 
     inline fun <reified T> parserJson(json: String) : T {

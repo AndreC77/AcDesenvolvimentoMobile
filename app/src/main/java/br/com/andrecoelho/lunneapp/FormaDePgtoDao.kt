@@ -9,14 +9,14 @@ import androidx.room.Query
 interface FormaDePgtoDao {
 
     @Query("SELECT * FROM formasDePgto where idFormaDePgto = :id")
-    fun getById(id : Long) : FormaDePgtoDao?
+    fun getById(id : Long) : FormaDePagamento?
 
     @Query("SELECT * FROM formasDePgto")
-    fun findAll() : List<Clientes>
+    fun findAll() : List<FormaDePagamento>
 
     @Insert
-    fun insert(forma : FormaDePgtoDao)
+    fun insert(forma : FormaDePagamento)
 
     @Delete
-    fun delete(forma: FormaDePgtoDao)
+    fun delete(forma: FormaDePagamento)
 }

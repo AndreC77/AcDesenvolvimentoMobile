@@ -8,6 +8,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_clientes.*
 import kotlinx.android.synthetic.main.toolbar.*
+import java.io.Serializable
 
 class ClientesActivity : DebugActivity() {
 

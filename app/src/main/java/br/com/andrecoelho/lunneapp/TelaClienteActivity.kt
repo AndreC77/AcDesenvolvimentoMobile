@@ -53,6 +53,7 @@ class TelaClienteActivity : DebugActivity(), NavigationView.OnNavigationItemSele
             this.clientes = ClientesService.getCliente(context)
             runOnUiThread {
                 recyclerClientes?.adapter = ClientesAdapter(clientes) { onClikClientes(it) }
+                //enviarNotificacao(this.clientes.get(0))
             }
         }.start()
     }
@@ -122,6 +123,15 @@ class TelaClienteActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         telaMenuLateral1.closeDrawer(GravityCompat.START)
         
         return true
+    }
+
+    fun enviarNotificacao(cliente: Clientes) {
+        //Intent para abrir tela quando clicar na notificacao
+        val intent = Intent(this, ClientesActivity::class.java)
+        //parametros extras
+        intent.putExtra("cliente", cliente)
+        //disparar notificacao
+        NotificationUtil.create(this, 0, intent, "Mais Vendas","Você tem uma Nova mudança no cliente ${cliente.nomeCompleto}")
     }
 
 }

@@ -11,25 +11,35 @@ object ProdutosService {
     val TAG = "WS_LMSApp"
 
     fun getProdutos(context: Context): List<Produtos> {
-
+        var produtos = ArrayList<Produtos>()
         if(AndroidUtils.isInternetDisponivel(context)) {
             val url = "$host/produtos"
             val json = HttpHelper.get(url)
-
-            Log.d(TAG, json)
-
-            return parserJson<List<Produtos>>(json)
+            produtos = parserJson(json)
+            //salvar offline
+            for (p in produtos){
+                saveOffline(p)
+            }
+            return produtos
         }else{
-            return ArrayList()
+            val dao = DatabaseManager.getProdutosDAO()
+            val produtos = dao.findAll()
+            return produtos
         }
     }
 
     fun delete(produto: Produtos): Response {
         Log.d(TAG, produto.idProduto.toString())
-        val url = "${host}/produtos/${produto.idProduto}"
-        val json = HttpHelper.delete(url)
-        Log.d(TAG, json)
-        return parserJson(json)
+        if(AndroidUtils.isInternetDisponivel(MaisVendasApplication.getInstance().applicationContext)) {
+            val url = "${host}/produtos/${produto.idProduto}"
+            val json = HttpHelper.delete(url)
+
+            return parserJson(json)
+        }else{
+            val dao = DatabaseManager.getProdutosDAO()
+            dao.delete(produto)
+            return Response(status = "OK", msg = "Dados Salvos Localmente")
+        }
     }
 
     fun save(produto: Produtos): Response {
@@ -41,6 +51,21 @@ object ProdutosService {
         Log.d(TAG, produto.toJson())
         val json = HttpHelper.put("$host/produtos/${produto.idProduto}", produto.toJson())
         return parserJson(json)
+    }
+
+    //Salvar Offline
+    fun saveOffline(produto: Produtos) : Boolean {
+        val dao = DatabaseManager.getProdutosDAO()
+        if (! existeProduto(produto)){
+            dao.insert(produto)
+        }
+        return true
+    }
+
+    //Verificar se Ja existe O Cliente
+    fun existeProduto(produto: Produtos) : Boolean {
+        val dao = DatabaseManager.getProdutosDAO()
+        return dao.getById(produto.idProduto) != null
     }
 
     inline fun <reified T> parserJson(json: String) : T {

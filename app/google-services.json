@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "27756478781",
+    "firebase_url": "https://mais-vendas-6a3d4.firebaseio.com",
+    "project_id": "mais-vendas-6a3d4",
+    "storage_bucket": "mais-vendas-6a3d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27756478781:android:45bf8bf971326261530554",
+        "android_client_info": {
+          "package_name": "br.com.andrecoelho.lunneapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "27756478781-kehl1n0rv47muok92op2rt3fhqkectu3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqHGvIpLS8dtqblk99xeaU5D-UPH-LZO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "27756478781-kehl1n0rv47muok92op2rt3fhqkectu3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

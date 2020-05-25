@@ -15,9 +15,9 @@ object DatabaseManager {
         ).build()
     }
 
-    fun getClientesDAO() : ClientesDao{
-        return dbInstance.clientesDAO()
-    }
+//    fun getClientesDAO() : ClientesDao{
+//        return dbInstance.clientesDAO()
+//    }
 
     fun getCoresDAO() : CoresDao{
         return dbInstance.coresDAO()

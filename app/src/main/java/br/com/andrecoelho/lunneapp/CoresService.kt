@@ -12,25 +12,33 @@ object CoresService {
     val TAG = "WS_LMSApp"
 
     fun getCores(context: Context): List<Cores> {
-
+        var cores = ArrayList<Cores>()
         if(AndroidUtils.isInternetDisponivel(context)) {
             val url = "$host/cor"
             val json = HttpHelper.get(url)
-
-            Log.d(TAG, json)
-
-            return parserJson<List<Cores>>(json)
+            cores = parserJson(json)
+            //salvar offline
+            for (c in cores){
+                saveOffiline(c)
+            }
+            return cores
         }else{
-            return ArrayList()
+            val dao = DatabaseManager.getCoresDAO()
+            val cores = dao.findAll()
+            return cores
         }
     }
 
     fun delete(cores: Cores): Response {
         Log.d(TAG, cores.idCor.toString())
-        val url = "${host}/cor/${cores.idCor}"
-        val json = HttpHelper.delete(url)
-        Log.d(TAG, json)
-        return parserJson(json)
+        if(AndroidUtils.isInternetDisponivel(MaisVendasApplication.getInstance().applicationContext)) {
+            val url = "${host}/cor/${cores.idCor}"
+            val json = HttpHelper.delete(url)
+            return parserJson(json)
+        }
+        val dao = DatabaseManager.getCoresDAO()
+        dao.delete(cores)
+        return Response(status = "OK", msg = "Dados Salvos Localmente")
     }
 
     fun save(cor: Cores): Response {
@@ -42,6 +50,21 @@ object CoresService {
         Log.d(TAG, cor.toJson())
         val json = HttpHelper.put("$host/cor/${cor.idCor}", cor.toJson())
         return parserJson(json)
+    }
+
+    //Salvar Offline
+    fun saveOffiline(cor: Cores) : Boolean {
+        val dao = DatabaseManager.getCoresDAO()
+        if (! existeCor(cor)){
+            dao.insert(cor)
+        }
+        return true
+    }
+
+    //Verificar se Ja existe O Cor
+    fun existeCor(cor: Cores) : Boolean {
+        val dao = DatabaseManager.getCoresDAO()
+        return dao.getById(cor.idCor) != null
     }
 
 

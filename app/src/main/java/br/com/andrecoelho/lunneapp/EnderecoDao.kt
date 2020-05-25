@@ -8,10 +8,10 @@ import androidx.room.Query
 @Dao
 interface EnderecoDao {
 
-    @Query("SELECT * FROM endereco where idEndereco = :id")
+    @Query("SELECT * FROM enderecoEntity where idEndereco = :id")
     fun getById(id : Long) : Endereco?
 
-    @Query("SELECT * FROM endereco")
+    @Query("SELECT * FROM enderecoEntity")
     fun findAll() : List<Endereco>
 
     @Insert

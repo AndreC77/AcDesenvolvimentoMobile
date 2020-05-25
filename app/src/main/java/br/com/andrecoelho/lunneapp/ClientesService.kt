@@ -15,14 +15,13 @@ object ClientesService {
     fun getCliente(context: Context): List<Clientes> {
 
         if(AndroidUtils.isInternetDisponivel(context)) {
+
             val url = "$host/clientes"
             val json = HttpHelper.get(url)
 
-            Log.d(TAG, json)
-
-            return parserJson<List<Clientes>>(json)
+            return parserJson(json)
         }else{
-            return ArrayList()
+            return ArrayList<Clientes>()
         }
     }
 
@@ -33,10 +32,11 @@ object ClientesService {
     }
 
     fun delete(cliente: Clientes): Response {
+
         Log.d("DEL", cliente.idCliente.toString())
         val url = "$host/clientes/${cliente.idCliente}"
         val json = HttpHelper.delete(url)
-        Log.d("DEL", json)
+
         return parserJson(json)
     }
 
@@ -45,6 +45,21 @@ object ClientesService {
         val json = HttpHelper.put("$host/clientes/${cliente.idCliente}", cliente.toJson())
         return parserJson(json)
     }
+
+//    //Salvar Offline
+//    fun saveOffline(cliente : Clientes) : Boolean {
+//        val dao = DatabaseManager.getClientesDAO()
+//        if (! existeCliente(cliente)){
+//            dao.insert(cliente)
+//        }
+//        return true
+//    }
+
+//    //Verificar se Ja existe O Cliente
+//    fun existeCliente(cliente: Clientes) : Boolean {
+//        val dao = DatabaseManager.getClientesDAO()
+//        return dao.getById(cliente.idCliente) != null
+//    }
 
     inline fun <reified T> parserJson(json: String) : T {
         val type = object : TypeToken<T>(){}.type

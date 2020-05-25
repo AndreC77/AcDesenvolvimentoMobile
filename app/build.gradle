@@ -40,7 +40,13 @@ dependencies {
     //Google Room - Banco de Dados
     implementation "androidx.room:room-runtime:2.2.3"
     kapt "androidx.room:room-compiler:2.2.3"
+    //FMC
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-messaging:17.3.2'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
+
+apply plugin: 'com.google.gms.google-services'

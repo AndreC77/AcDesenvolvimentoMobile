@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.GsonBuilder
 import java.io.Serializable
 
-@Entity(tableName = "endereco")
+@Entity(tableName = "enderecoEntity")
 class Endereco : Serializable {
 
     @PrimaryKey
