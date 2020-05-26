@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.graphics.component1
 
 
 import androidx.core.view.GravityCompat
@@ -28,13 +29,18 @@ class TelaClienteActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tela_cliente)
 
-        val args = intent.extras
-        val titulo = args?.getString("selecionado")
+//        val args = intent.extras
+//        val titulo = args?.getString("selecionado")
+
+//        var teste : MenuItem? = null
+//        var seila = teste?.isChecked
+//        seila = true
+
 
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = titulo
+        supportActionBar?.title = "Clientes"
         configuraMenuLateral()
 
         recyclerClientes?.layoutManager = LinearLayoutManager(context)
@@ -94,34 +100,45 @@ class TelaClienteActivity : DebugActivity(), NavigationView.OnNavigationItemSele
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        
-        var intent = Intent(this, MainActivity::class.java)
-        
+
+        var intent1 = Intent(this, TelaProdutosActivity::class.java)
+        var intent2 = Intent(this, TelaEstoqueActivity::class.java)
+        var intent3 = Intent(this, TelaVendedorActivity::class.java)
+        var intent4 = Intent(this, TelaFormaDePgtoActivity::class.java)
+        var intent5 = Intent(this, TelaCoresActivity::class.java)
+
+        item.setCheckable(true)
         when (item.itemId){
-            R.id.nav_menssagens -> (
-                    Toast.makeText(this, "Menssagens", Toast.LENGTH_SHORT).show()
+            R.id.nav_produtos -> (
+
+                    startActivity(intent1)
+                    //Toast.makeText(this, "Menssagens", Toast.LENGTH_SHORT).show()
                     )
-            R.id.nav_pedidos -> (
-                    Toast.makeText(this, "Pedidos", Toast.LENGTH_SHORT).show()
+            R.id.nav_estoque -> (
+                    startActivity(intent2)
+                    //Toast.makeText(this, "Pedidos", Toast.LENGTH_SHORT).show()
                     )
-            R.id.nav_configuracao -> (
-                    Toast.makeText(this, "Configuração", Toast.LENGTH_SHORT).show()
+            R.id.nav_vendedores -> (
+                    startActivity(intent3)
+                    //Toast.makeText(this, "Configuração", Toast.LENGTH_SHORT).show()
                     )
-            R.id.nav_localizacao -> (
-                    Toast.makeText(this, "Localização", Toast.LENGTH_SHORT).show()
+            R.id.nav_formaDePgto -> (
+                    startActivity(intent4)
+                    //Toast.makeText(this, "Localização", Toast.LENGTH_SHORT).show()
                     )
-            R.id.nav_site -> (
-                    Toast.makeText(this, "Site", Toast.LENGTH_SHORT).show()
+            R.id.nav_cores -> (
+                    startActivity(intent5)
+                    //Toast.makeText(this, "Site", Toast.LENGTH_SHORT).show()
                     )
         }
 
         if (item.itemId == R.id.nav_sair){
+            var intent = Intent(this, MainActivity::class.java)
             Toast.makeText(this, "Sair", Toast.LENGTH_SHORT).show()
             startActivity(intent)
             finish()
         }
         telaMenuLateral1.closeDrawer(GravityCompat.START)
-        
         return true
     }
 

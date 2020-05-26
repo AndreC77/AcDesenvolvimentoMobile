@@ -28,13 +28,12 @@ class TelaCoresActivity : DebugActivity(), NavigationView.OnNavigationItemSelect
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tela_cores)
 
-        val args = intent.extras
-        val titulo = args?.getString("selecionado")
-
+//        val args = intent.extras
+//        val titulo = args?.getString("selecionado")
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = titulo
+        supportActionBar?.title = "Cores"
         configuraMenuLateral()
 
         recyclerCores?.layoutManager = LinearLayoutManager(context)
@@ -97,21 +96,33 @@ class TelaCoresActivity : DebugActivity(), NavigationView.OnNavigationItemSelect
 
         var intent = Intent(this, MainActivity::class.java)
 
+        var intent1 = Intent(this, TelaProdutosActivity::class.java)
+        var intent2 = Intent(this, TelaEstoqueActivity::class.java)
+        var intent3 = Intent(this, TelaVendedorActivity::class.java)
+        var intent4 = Intent(this, TelaFormaDePgtoActivity::class.java)
+        var intent5 = Intent(this, TelaClienteActivity::class.java)
+
+
         when (item.itemId){
-            R.id.nav_menssagens -> (
-                    Toast.makeText(this, "Menssagens", Toast.LENGTH_SHORT).show()
+            R.id.nav_produtos -> (
+                    startActivity(intent1)
+                    //Toast.makeText(this, "Menssagens", Toast.LENGTH_SHORT).show()
                     )
-            R.id.nav_pedidos -> (
-                    Toast.makeText(this, "Pedidos", Toast.LENGTH_SHORT).show()
+            R.id.nav_estoque -> (
+                    startActivity(intent2)
+                    //Toast.makeText(this, "Pedidos", Toast.LENGTH_SHORT).show()
                     )
-            R.id.nav_configuracao -> (
-                    Toast.makeText(this, "Configuração", Toast.LENGTH_SHORT).show()
+            R.id.nav_vendedores -> (
+                    startActivity(intent3)
+                    //Toast.makeText(this, "Configuração", Toast.LENGTH_SHORT).show()
                     )
-            R.id.nav_localizacao -> (
-                    Toast.makeText(this, "Localização", Toast.LENGTH_SHORT).show()
+            R.id.nav_formaDePgto -> (
+                    startActivity(intent4)
+                    //Toast.makeText(this, "Localização", Toast.LENGTH_SHORT).show()
                     )
-            R.id.nav_site -> (
-                    Toast.makeText(this, "Site", Toast.LENGTH_SHORT).show()
+            R.id.nav_clientes -> (
+                    startActivity(intent5)
+                    //Toast.makeText(this, "Site", Toast.LENGTH_SHORT).show()
                     )
         }
 

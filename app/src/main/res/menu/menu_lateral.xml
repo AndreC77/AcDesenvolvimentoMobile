@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_pedidos"
-            android:title="Pedidos" android:checked="true" />
-        <item
-            android:id="@+id/nav_menssagens"
-            android:icon="@drawable/ic_chat_black"
-            android:title="Menssagens"/>
-        <item
-            android:id="@+id/nav_site"
-            android:title="Site"/>
-        <item
-            android:id="@+id/nav_configuracao"
-            android:icon="@drawable/ic_configuracoes_black"
-            android:title="Configuração"/>
-        <item
-            android:id="@+id/nav_localizacao"
-            android:icon="@drawable/ic_local_black"
-            android:title="Localização"/>
-        <item
-            android:id="@+id/nav_sair"
-            android:title="Sair"/>
+
+        <item android:id="@+id/nav_clientes" android:title="Clientes"  />
+
+        <item android:id="@+id/nav_produtos" android:title="Produtos"/>
+
+        <item android:id="@+id/nav_estoque" android:title="Estoque"/>
+
+        <item android:id="@+id/nav_vendedores" android:title="Vendedores"/>
+
+        <item android:id="@+id/nav_formaDePgto" android:title="Forma de Pagamentos"/>
+
+        <item android:id="@+id/nav_cores" android:title="Cores"/>
+
+        <item android:id="@+id/nav_localizacao" android:icon="@drawable/ic_local_black" android:title="Localização"/>
+
+        <item android:id="@+id/nav_sair" android:title="Sair"/>
 
     </group>
 </menu>

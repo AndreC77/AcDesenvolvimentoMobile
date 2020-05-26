@@ -36,7 +36,7 @@ class MainActivity : DebugActivity() {
 
         var vendedor = Vendedor()
 
-        var intent = Intent(this, TelaInicialActivity::class.java)
+        var intent = Intent(this, TelaClienteActivity::class.java)
         val nomeUsuario = usuario.text.toString()
         val senhaUsuario = senha.text.toString()
 
