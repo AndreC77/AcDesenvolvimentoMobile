@@ -295,23 +295,20 @@
 
     <TextView
         android:id="@+id/txtInsertFuncionario"
-        android:layout_width="283dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="102dp"
         android:layout_marginBottom="97dp"
         android:text="Funcionario:"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/insertCodVendedor"
         app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
         android:id="@+id/spinnerFuncionario"
-        android:layout_width="60dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"

@@ -164,7 +164,7 @@
 
     <Spinner
         android:id="@+id/spinnerParcela1"
-        android:layout_width="60dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="185dp"
@@ -177,7 +177,7 @@
 
     <Spinner
         android:id="@+id/spinnerParcela2"
-        android:layout_width="60dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="20dp"
@@ -191,7 +191,7 @@
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="280dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="185dp"
@@ -205,7 +205,7 @@
 
     <TextView
         android:id="@+id/textView9"
-        android:layout_width="280dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
@@ -219,7 +219,7 @@
 
     <Spinner
         android:id="@+id/spinnerParcela6"
-        android:layout_width="60dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="20dp"
@@ -232,7 +232,7 @@
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="280dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
@@ -246,7 +246,7 @@
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="280dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
@@ -260,7 +260,7 @@
 
     <Spinner
         android:id="@+id/spinnerParcela4"
-        android:layout_width="60dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="20dp"
@@ -274,7 +274,7 @@
 
     <Spinner
         android:id="@+id/spinnerParcela5"
-        android:layout_width="60dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="20dp"
@@ -288,7 +288,7 @@
 
     <Spinner
         android:id="@+id/spinnerParcela3"
-        android:layout_width="60dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="20dp"
@@ -302,7 +302,7 @@
 
     <TextView
         android:id="@+id/textView10"
-        android:layout_width="280dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
@@ -316,7 +316,7 @@
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="280dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"

@@ -3,11 +3,13 @@ package br.com.andrecoelho.lunneapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.core.text.set
 import kotlinx.android.synthetic.main.activity_cadastro_forma.*
 import java.lang.Integer.parseInt
@@ -102,34 +104,40 @@ class CadastroFormaActivity : DebugActivity() {
 
             buttonSalvarForma.setOnClickListener {
 
-                forma?.codigoFormaDePgto = parseLong(insertCodForma.text.toString())
-                forma?.descricaoFormaDePgto = insertDescricao.text.toString()
-                forma?.parcela1 = parseInt(spinnerP1.selectedItem.toString())
-                forma?.parcela2 = parseInt(spinnerP2.selectedItem.toString())
-                forma?.parcela3 = parseInt(spinnerP3.selectedItem.toString())
-                forma?.parcela4 = parseInt(spinnerP4.selectedItem.toString())
-                forma?.parcela5 = parseInt(spinnerP5.selectedItem.toString())
-                forma?.parcela6 = parseInt(spinnerP6.selectedItem.toString())
+                var validarDados = validarDados()
+                if(validarDados) {
+                    forma?.codigoFormaDePgto = parseLong(insertCodForma.text.toString())
+                    forma?.descricaoFormaDePgto = insertDescricao.text.toString()
+                    forma?.parcela1 = parseInt(spinnerP1.selectedItem.toString())
+                    forma?.parcela2 = parseInt(spinnerP2.selectedItem.toString())
+                    forma?.parcela3 = parseInt(spinnerP3.selectedItem.toString())
+                    forma?.parcela4 = parseInt(spinnerP4.selectedItem.toString())
+                    forma?.parcela5 = parseInt(spinnerP5.selectedItem.toString())
+                    forma?.parcela6 = parseInt(spinnerP6.selectedItem.toString())
 
-                taskPut(forma!!)
+                    taskPut(forma!!)
+                }
             }
             supportActionBar?.title = "Editar Forma de Pagamento"
         }else{
             //atribuicao
             buttonSalvarForma.setOnClickListener {
-
+                var validarDados = validarDados()
                 val forma = FormaDePagamento()
+                if(validarDados) {
+                    forma.codigoFormaDePgto = parseLong(insertCodForma.text.toString())
+                    forma.descricaoFormaDePgto = insertDescricao.text.toString()
+                    forma.parcela1 = parseInt(spinnerP1.selectedItem.toString())
+                    forma.parcela2 = parseInt(spinnerP2.selectedItem.toString())
+                    forma.parcela3 = parseInt(spinnerP3.selectedItem.toString())
+                    forma.parcela4 = parseInt(spinnerP4.selectedItem.toString())
+                    forma.parcela5 = parseInt(spinnerP5.selectedItem.toString())
+                    forma.parcela6 = parseInt(spinnerP6.selectedItem.toString())
 
-                forma.codigoFormaDePgto = parseLong(insertCodForma.text.toString())
-                forma.descricaoFormaDePgto = insertDescricao.text.toString()
-                forma.parcela1 = parseInt(spinnerP1.selectedItem.toString())
-                forma.parcela2 = parseInt(spinnerP2.selectedItem.toString())
-                forma.parcela3 = parseInt(spinnerP3.selectedItem.toString())
-                forma.parcela4 = parseInt(spinnerP4.selectedItem.toString())
-                forma.parcela5 = parseInt(spinnerP5.selectedItem.toString())
-                forma.parcela6 = parseInt(spinnerP6.selectedItem.toString())
-
-                taskAtualizar(forma)
+                    taskAtualizar(forma)
+                }else{
+                    Toast.makeText(this,"Erro ao Cadastrar", Toast.LENGTH_SHORT).show()
+                }
             }
             supportActionBar?.title = "Incluir Foma de Pagamento"
         }
@@ -167,5 +175,29 @@ class CadastroFormaActivity : DebugActivity() {
                 finish()
             }
         }.start()
+    }
+
+    //Validar os dados
+    private fun validarDados() : Boolean {
+
+        var v1 = 0; var v2 = 0
+        var n = insertCodForma.text.toString()
+        if (insertCodForma.text.toString() == ""){ n = "0"}
+
+        if(!TextUtils.isEmpty(insertDescricao.text.toString()) && insertDescricao.text.length > 3 && insertDescricao.text.length < 31){
+            v1 = 1
+        }else{
+            insertDescricao.setError("Descrição deve ter min 4 caracteres e max 30")
+            insertDescricao.requestFocus()
+        }
+
+        if(parseInt(n) > 0 && parseInt(n) <= 999){
+            v2 = 1
+        }else{
+            insertCodForma.setError("Codigo deve estar entre 1 e 999")
+            insertCodForma.requestFocus()
+        }
+        if(v1 == 1 && v2 == 1){return true}
+        return false
     }
 }

@@ -33,7 +33,7 @@ class VendedorActivity : DebugActivity() {
         emailVendedor.text = vendedor?.emailVendedor
         telVendedor.text = vendedor?.telefone
         celVendedor.text = vendedor?.celular
-        funcionario.text = vendedor?.celular
+        funcionario.text = vendedor?.funcionario
 
         //colocar toobar
         setSupportActionBar(toolbar)

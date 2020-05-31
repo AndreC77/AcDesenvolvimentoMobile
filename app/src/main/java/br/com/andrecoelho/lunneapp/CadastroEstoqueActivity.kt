@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_cadastro_estoque.*
 import kotlinx.android.synthetic.main.activity_tela_inicial.*
 import java.lang.Long.parseLong
@@ -25,21 +26,28 @@ class CadastroEstoqueActivity : AppCompatActivity() {
 
             buttonSalvarEstoque.setOnClickListener {
 
-                estoque?.codProduto = parseLong(insertCodEstoque.text.toString())
-                estoque?.qtdEstoque = parseLong(insertQtdEstoque.text.toString())
+                var validarDados = validarDados()
+                if(validarDados) {
+                    estoque?.codProduto = parseLong(insertCodEstoque.text.toString())
+                    estoque?.qtdEstoque = parseLong(insertQtdEstoque.text.toString())
 
-                taskPut(estoque!!)
+                    taskPut(estoque!!)
+                }
             }
             supportActionBar?.title = "Editar Estoque"
         }else{
 
             buttonSalvarEstoque.setOnClickListener {
+                var validarDados = validarDados()
+                if(validarDados) {
+                    val estoque = Estoque()
+                    estoque.codProduto = parseLong(insertCodEstoque.text.toString())
+                    estoque.qtdEstoque = parseLong(insertQtdEstoque.text.toString())
 
-                val estoque = Estoque()
-                estoque.codProduto = parseLong(insertCodEstoque.text.toString())
-                estoque.qtdEstoque = parseLong(insertQtdEstoque.text.toString())
-
-                taskAtualizar(estoque)
+                    taskAtualizar(estoque)
+                }else{
+                    Toast.makeText(this,"Error ao Cadastrar",Toast.LENGTH_SHORT).show()
+                }
             }
             supportActionBar?.title = "Incluir Estoque"
         }
@@ -76,5 +84,30 @@ class CadastroEstoqueActivity : AppCompatActivity() {
                 finish()
             }
         }.start()
+    }
+
+    //função pra validar os dados
+    private fun validarDados() : Boolean{
+
+        var v1 = 0; var v2 = 0
+
+        //Validar Cod
+        if(insertCodEstoque.text.toString() != ""){
+            v1 = 1
+        }else{
+            insertCodEstoque.setError("Campo deve ser preenchido")
+            insertCodEstoque.requestFocus()
+        }
+
+        //Validar Qtd
+        if(insertQtdEstoque.text.toString() != ""){
+            v2 = 1
+        }else{
+            insertQtdEstoque.setError("Campo deve ser preenchido")
+            insertQtdEstoque.requestFocus()
+        }
+
+        if(v1 == 1 && v2 == 2){return true}
+        return false
     }
 }

@@ -5,6 +5,7 @@ import android.util.Log
 import br.com.fernandosousa.lmsapp.HttpHelper
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.lang.Exception
 
 object VendedorService {
 
@@ -29,29 +30,51 @@ object VendedorService {
         }
     }
 
+//    fun delete(vendedor: Vendedor): Response {
+//        Log.d(TAG, vendedor.id.toString())
+//        if (AndroidUtils.isInternetDisponivel(MaisVendasApplication.getInstance().applicationContext)) {
+//            val url = "${host}/vendedores/${vendedor.id}"
+//            val json = HttpHelper.delete(url)
+//
+//            return parserJson(json)
+//        }else{
+//            val dao = DatabaseManager.getVendedorDAO()
+//            dao.delete(vendedor)
+//            return Response(status = "OK", msg = "Dados Salvos Localmente")
+//        }
+//    }
+
     fun delete(vendedor: Vendedor): Response {
         Log.d(TAG, vendedor.id.toString())
-        if (AndroidUtils.isInternetDisponivel(MaisVendasApplication.getInstance().applicationContext)) {
+        try {
             val url = "${host}/vendedores/${vendedor.id}"
             val json = HttpHelper.delete(url)
 
             return parserJson(json)
-        }else{
+        }catch (e : Exception) {
             val dao = DatabaseManager.getVendedorDAO()
             dao.delete(vendedor)
             return Response(status = "OK", msg = "Dados Salvos Localmente")
         }
     }
 
-    fun save(vendedor: Vendedor): Response {
-        val json = HttpHelper.post("${host}/vendedores", vendedor.toJson())
-        return parserJson(json)
+    fun save(vendedor: Vendedor): Response? {
+        try {
+            val json = HttpHelper.post("${host}/vendedores", vendedor.toJson())
+            return parserJson(json)
+        }catch (e : Exception){
+            return null
+        }
     }
 
-    fun edit(vendedor: Vendedor): Response {
-        Log.d(TAG, vendedor.toJson())
-        val json = HttpHelper.put("$host/vendedores/${vendedor.id}", vendedor.toJson())
-        return parserJson(json)
+    fun edit(vendedor: Vendedor): Response? {
+        try {
+            Log.d(TAG, vendedor.toJson())
+            val json = HttpHelper.put("$host/vendedores/${vendedor.id}", vendedor.toJson())
+            return parserJson(json)
+        }catch (e : Exception){
+            return null
+        }
     }
 
     //Salvar Offline
@@ -63,19 +86,42 @@ object VendedorService {
         return true
     }
 
-    //Verificar se Ja existe O Cliente
+    //Verificar se Ja existe O Vendedor
     fun existeVendedor(vendedor: Vendedor) : Boolean {
         val dao = DatabaseManager.getVendedorDAO()
         return dao.getById(vendedor.id) != null
     }
 
+//    fun senha(vendedor: Vendedor): Vendedor? {
+//        if (AndroidUtils.isInternetDisponivel(MaisVendasApplication.getInstance().applicationContext)) {
+//            val json = HttpHelper.post("${host}/vendedores/login", vendedor.toJson())
+//            if (json == "vendedor não cadatrado" || json == "senha invalida"){
+//                return null
+//            }else {
+//                return parserJson(json)
+//            }
+//        }else{
+//            return null
+//        }
+//    }
+
     fun senha(vendedor: Vendedor): Vendedor? {
-        val json = HttpHelper.post("${host}/vendedores/login", vendedor.toJson())
-        if (json == "vendedor não cadatrado" || json == "senha invalida"){
+        try {
+            if (AndroidUtils.isInternetDisponivel(MaisVendasApplication.getInstance().applicationContext)) {
+                val json = HttpHelper.post("${host}/vendedores/login", vendedor.toJson())
+                if (json == "vendedor não cadatrado" || json == "senha invalida") {
+                    return null
+                } else {
+                    return parserJson(json)
+                }
+            } else {
+                return null
+            }
+        }catch (e :Exception){
             return null
         }
-        return parserJson(json)
     }
+
 
     inline fun <reified T> parserJson(json: String) : T {
         val type = object : TypeToken<T>(){}.type

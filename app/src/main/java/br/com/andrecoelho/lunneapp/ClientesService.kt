@@ -5,6 +5,7 @@ import android.util.Log
 import br.com.fernandosousa.lmsapp.HttpHelper
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.lang.Exception
 import java.net.URL
 
 object ClientesService {
@@ -12,15 +13,27 @@ object ClientesService {
     val host = "http://192.168.100.8:8080"
     val TAG = "WS_LMSApp"
 
+//    fun getCliente(context: Context): List<Clientes> {
+//
+//        if(AndroidUtils.isInternetDisponivel(context)) {
+//
+//            val url = "$host/clientes"
+//            val json = HttpHelper.get(url)
+//
+//            return parserJson(json)
+//        }else{
+//            return ArrayList<Clientes>()
+//        }
+//    }
+
     fun getCliente(context: Context): List<Clientes> {
 
-        if(AndroidUtils.isInternetDisponivel(context)) {
-
+        try {
             val url = "$host/clientes"
             val json = HttpHelper.get(url)
 
             return parserJson(json)
-        }else{
+        }catch (e : Exception){
             return ArrayList<Clientes>()
         }
     }

@@ -3,13 +3,16 @@ package br.com.andrecoelho.lunneapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_cadastro_forma.*
 import kotlinx.android.synthetic.main.activity_cadastro_vendedor.*
+import java.lang.Integer.parseInt
 import java.lang.Long.parseLong
 
 
@@ -48,30 +51,38 @@ class CadastroVendedorActivity : DebugActivity() {
 
             buttonSalvarVendedor.setOnClickListener {
 
-                vendedor?.nome = insertNomeVendedor.text.toString()
-                vendedor?.emailVendedor = insertEmailVendedor.text.toString()
-                vendedor?.senha = insertSenhaVendedor.text.toString()
-                vendedor?.telefone = insertTelVendedor.text.toString()
-                vendedor?.celular = insertCelVendedor.text.toString()
-                vendedor?.codVendedor = parseLong(insertCodVendedor.text.toString())
-                vendedor?.funcionario = spinnerV.selectedItem.toString()
-                taskPut(vendedor!!)
+                var validarDados = validarDados()
+                if(validarDados) {
+                    vendedor?.nome = insertNomeVendedor.text.toString()
+                    vendedor?.emailVendedor = insertEmailVendedor.text.toString()
+                    vendedor?.senha = insertSenhaVendedor.text.toString()
+                    vendedor?.telefone = insertTelVendedor.text.toString()
+                    vendedor?.celular = insertCelVendedor.text.toString()
+                    vendedor?.codVendedor = parseLong(insertCodVendedor.text.toString())
+                    vendedor?.funcionario = spinnerFuncionario.selectedItem.toString()
+                    taskPut(vendedor!!)
+                }
             }
             supportActionBar?.title = "Editar Vendedor"
         }else{
 
             buttonSalvarVendedor.setOnClickListener {
 
-                var vendedor = Vendedor()
-                vendedor.nome = insertNomeVendedor.text.toString()
-                vendedor.emailVendedor = insertEmailVendedor.text.toString()
-                vendedor.senha = insertSenhaVendedor.text.toString()
-                vendedor.telefone = insertTelVendedor.text.toString()
-                vendedor.celular = insertCelVendedor.text.toString()
-                vendedor.codVendedor = parseLong(insertCodVendedor.text.toString())
-                vendedor.funcionario = spinnerV.selectedItem.toString()
+                var validarDados = validarDados()
+                if(validarDados) {
+                    var vendedor = Vendedor()
+                    vendedor.nome = insertNomeVendedor.text.toString()
+                    vendedor.emailVendedor = insertEmailVendedor.text.toString()
+                    vendedor.senha = insertSenhaVendedor.text.toString()
+                    vendedor.telefone = insertTelVendedor.text.toString()
+                    vendedor.celular = insertCelVendedor.text.toString()
+                    vendedor.codVendedor = parseLong(insertCodVendedor.text.toString())
+                    vendedor.funcionario = spinnerFuncionario.selectedItem.toString()
 
-                taskAtualizar(vendedor)
+                    taskAtualizar(vendedor)
+                }else{
+                    Toast.makeText(this,"Erro ao Cadastrar",Toast.LENGTH_SHORT).show()
+                }
             }
             supportActionBar?.title = "Incluir Vendedor"
         }
@@ -108,6 +119,72 @@ class CadastroVendedorActivity : DebugActivity() {
                 finish()
             }
         }.start()
+    }
+
+    private fun validarDados() : Boolean {
+        var v1 = 0; var v2 = 0; var v3 = 0; var v4 = 0; var v5 = 0; var v6 = 0; var v7 = 0
+
+        //campo nome
+        if(!TextUtils.isEmpty(insertNomeVendedor.text.toString()) && insertNomeVendedor.text.length > 4 && insertNomeVendedor.text.length < 51){
+            v1 = 1
+        }else{
+            insertNomeVendedor.setError("Nome tem que ter min 5 caracteres max 50 ")
+            insertNomeVendedor.requestFocus()
+        }
+
+        //campo email
+        if(!TextUtils.isEmpty(insertEmailVendedor.text.toString()) && insertEmailVendedor.text.length > 4 && insertEmailVendedor.text.length < 41){
+            v2 = 1
+        }else{
+            insertEmailVendedor.setError("Email tem que ter min 5 caracteres max 40 ")
+            insertEmailVendedor.requestFocus()
+        }
+
+        //campo senha
+        if(!TextUtils.isEmpty(insertSenhaVendedor.text.toString())){
+            v3 = 1
+        }else{
+            insertSenhaVendedor.setError("Campo deve ser preenchido")
+            insertSenhaVendedor.requestFocus()
+        }
+
+        //campo confirmar senha
+        if(insertSenhaVendedor.text.toString() == confirmarSenha.text.toString()){
+            v4 = 1
+        }else{
+            confirmarSenha.setError("Senha diferente!")
+            confirmarSenha.requestFocus()
+        }
+
+        //campo telefone
+        if(!TextUtils.isEmpty(insertTelVendedor.text.toString())){
+            v5 = 1
+        }else{
+            insertTelVendedor.setError("Campo deve ser preenchido")
+            insertTelVendedor.requestFocus()
+        }
+
+        //campo celular
+        if(!TextUtils.isEmpty(insertCelVendedor.text.toString())){
+            v6 = 1
+        }else{
+            insertCelVendedor.setError("Campo deve ser preenchido")
+            insertCelVendedor.requestFocus()
+        }
+
+        //campo codigo
+        var n = insertCodVendedor.text.toString()
+        if(n == ""){n = "0"}
+        if(!TextUtils.isEmpty(insertCodVendedor.text.toString()) && parseInt(n) > 0 && parseInt(n) < 1000){
+            v7 = 1
+        }else{
+            insertCodVendedor.setError("Codigo deve estar entre 1 e 999")
+            insertCodVendedor.requestFocus()
+        }
+
+        if(v1 == 1 && v2 == 1 && v3 == 1 && v4 == 1 && v5 == 1 && v6 == 1 && v7 == 1){return true}
+
+        return false
     }
 
 }

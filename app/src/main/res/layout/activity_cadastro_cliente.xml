@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,148 +16,232 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ImageButton
+                android:id="@+id/imageViewPrincipal"
+                android:layout_width="236dp"
+                android:layout_height="108dp"
+                android:backgroundTint="@android:color/transparent"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="90dp"
+                android:layout_marginBottom="50dp"
+                app:srcCompat="@drawable/logo"
+                android:contentDescription="TODO" />
+
+
             <EditText
                 android:id="@+id/insertCodCliente"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="360dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_form_field_top"
+                android:padding="5dp"
+                android:hint="@string/code"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="-2dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Codigo" />
+                android:inputType="number" />
 
             <EditText
                 android:id="@+id/insertRegFederal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="360dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_form_field_top"
+                android:padding="5dp"
+                android:hint="Registro Federal"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="-2dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Registro Federal" />
+                android:inputType="textPersonName"/>
 
             <EditText
                 android:id="@+id/insertInsEstadual"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="360dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_form_field_top"
+                android:padding="5dp"
+                android:hint="@string/insEstadual"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="-2dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Ins. Estadual" />
+                android:inputType="textPersonName"/>
 
             <EditText
                 android:id="@+id/insertRazSocial"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="360dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_form_field_top"
+                android:padding="5dp"
+                android:hint="@string/razaoSocial"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="-2dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Razão Social" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/insertNomeFantazia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="360dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_form_field_top"
+                android:padding="5dp"
+                android:hint="@string/nomeFantasia"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="-2dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Nome Fantasia" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/insertNomeComp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="360dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_form_field_top"
+                android:padding="5dp"
+                android:hint="@string/nomeCompleto"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="-2dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Nome Completo" />
+                android:inputType="textPersonName"/>
 
             <EditText
                 android:id="@+id/insertEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="360dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_form_field_top"
+                android:padding="5dp"
+                android:hint="@string/email"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="-2dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Email" />
+                android:inputType="textPersonName"/>
 
             <EditText
                 android:id="@+id/insertTelCliente"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="360dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_form_field_top"
+                android:padding="5dp"
+                android:hint="@string/telephone"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="-2dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Telefone " />
+                android:inputType="textPersonName"/>
 
             <EditText
                 android:id="@+id/insertCelCliente"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="360dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_form_field_top"
+                android:padding="5dp"
+                android:hint="@string/cellphone"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="-2dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Celular" />
+                android:inputType="textPersonName"/>
 
             <EditText
                 android:id="@+id/insertCep"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="360dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_form_field_top"
+                android:padding="5dp"
+                android:hint="@string/cep"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="-2dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Cep" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/insertRua"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="360dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_form_field_top"
+                android:padding="5dp"
+                android:hint="@string/rua"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="-2dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Rua" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/insertNumCasa"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="360dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_form_field_top"
+                android:padding="5dp"
+                android:hint="@string/Numero"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="-2dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Numero" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/insertCompl"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="360dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_form_field_top"
+                android:padding="5dp"
+                android:hint="@string/complemento"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="-2dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Nameomplemento" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/insertBairro"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="360dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_form_field_top"
+                android:padding="5dp"
+                android:hint="@string/bairro"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="-2dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Bairro" />
+                android:inputType="textPersonName"/>
 
             <EditText
                 android:id="@+id/insertMunic"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="360dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_form_field_top"
+                android:padding="5dp"
+                android:hint="@string/municipio"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="-2dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Municipio" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/insertUf"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="360dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_form_field_top"
+                android:padding="5dp"
+                android:hint="@string/uf"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="-2dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="UF" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/insertIbge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="360dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_form_field_top"
+                android:padding="5dp"
+                android:hint="@string/ibge"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="-2dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="IBGE" />
+                android:inputType="textPersonName" />
 
             <Button
                 android:id="@+id/salvarCliente"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Salvar " />
+                android:layout_width="360dp"
+                android:layout_height="42dp"
+                android:backgroundTint="#000000"
+                android:text="Salvar "
+                android:textColor="@color/branco"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="20dp"/>
         </LinearLayout>
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

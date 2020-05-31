@@ -58,12 +58,14 @@ class MainActivity : DebugActivity() {
             Prefs.setString("lembrarSenha", "")
         }
 
+
         //POST  de Senha
         Thread {
             resposta = VendedorService.senha(vendedor)
+            Log.d("senha",resposta.toString())
         }.start()
         resposta?.toJson()
-
+        Log.d("senha","teste ${resposta.toString()}")
         var name = resposta?.nome.toString()
 
         //Validacao do Login
