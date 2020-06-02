@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_tela_cliente.menulateral
 import kotlinx.android.synthetic.main.activity_tela_cores.*
 import kotlinx.android.synthetic.main.activity_tela_forma_de_pgto.*
 import kotlinx.android.synthetic.main.toolbar.*
+import java.lang.Exception
 
 class TelaFormaDePgtoActivity : DebugActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -51,9 +53,16 @@ class TelaFormaDePgtoActivity : DebugActivity(), NavigationView.OnNavigationItem
     fun taskForma(){
 
         Thread {
-            this.forma = FormaDePgtoService.getForma(context)
-            runOnUiThread {
-                recyclerFormaDePgto?.adapter = FormaDePgtoAdapter(forma) { onClikForma(it) }
+            try {
+                this.forma = FormaDePgtoService.getForma(context)
+                runOnUiThread {
+                    recyclerFormaDePgto?.adapter = FormaDePgtoAdapter(forma) { onClikForma(it) }
+                }
+            }catch (e : Exception){
+                runOnUiThread {
+                    Toast.makeText(context, "Erro de Conexão", Toast.LENGTH_SHORT).show()
+                    allert()
+                }
             }
         }.start()
     }
@@ -77,6 +86,8 @@ class TelaFormaDePgtoActivity : DebugActivity(), NavigationView.OnNavigationItem
         val id = item?.itemId
         if(id == R.id.action_adicionar){
             startActivityForResult(intent, REQUEST_CADASTRO)
+        }else if (id == R.id.action_request){
+            taskForma()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -143,6 +154,15 @@ class TelaFormaDePgtoActivity : DebugActivity(), NavigationView.OnNavigationItem
             // atualizar lista de disciplinas
             taskForma()
         }
+    }
+
+    private fun allert(){
+        AlertDialog.Builder(context).setTitle(R.string.app_name).setMessage("Erro de Conexão")
+            .setPositiveButton("Ok") {
+                    dialog, which ->
+                dialog.dismiss()
+                taskForma()
+            }.create().show()
     }
 
 }

@@ -7,28 +7,30 @@
     android:id="@+id/telaMenuLateral3"
     android:fitsSystemWindows="true">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".TelaCoresActivity">
         <include layout="@layout/toolbar" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/recyclerCores"
-                android:cacheColorHint="@android:color/transparent"
-                android:clipToPadding="false"
-                android:divider="@null"
-                android:dividerHeight="0dp"
-                android:listSelector="@android:color/transparent"
-                android:scrollbarStyle="outsideOverlay"
-                android:scrollbars="vertical"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerCores"
+                    android:layout_width="match_parent"
+                    android:layout_height="156dp"
+                    android:cacheColorHint="@android:color/transparent"
+                    android:clipToPadding="false"
+                    android:divider="@null"
+                    android:dividerHeight="0dp"
+                    android:listSelector="@android:color/transparent"
+                    android:scrollbarStyle="outsideOverlay"
+                    android:scrollbars="vertical">
+
+                </androidx.recyclerview.widget.RecyclerView>
 
         </ScrollView>
     </LinearLayout>
@@ -40,7 +42,9 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/menu_lateral_cabecalho"
-        app:menu="@menu/menu_lateral" />
+        app:menu="@menu/menu_lateral" >
+
+    </com.google.android.material.navigation.NavigationView>
 
 
 

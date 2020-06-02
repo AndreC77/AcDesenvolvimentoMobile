@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+    <item android:id="@+id/action_request"
+        android:title="Request"
+        android:icon="@drawable/ic_atualizar_white"
+        app:showAsAction="always"/>
+
     <item android:id="@+id/action_adicionar"
         android:title="Adicionar"
         android:icon="@drawable/ic_adicionar_white"
         app:showAsAction="always"
         />
-
-
-
 
 </menu>

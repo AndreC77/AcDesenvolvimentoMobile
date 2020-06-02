@@ -5,6 +5,7 @@ import android.util.Log
 import br.com.fernandosousa.lmsapp.HttpHelper
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.lang.Exception
 
 object ProdutosService {
     val host = "http://192.168.100.8:8080"
@@ -12,45 +13,40 @@ object ProdutosService {
 
     fun getProdutos(context: Context): List<Produtos> {
         var produtos = ArrayList<Produtos>()
-        if(AndroidUtils.isInternetDisponivel(context)) {
-            val url = "$host/produtos"
-            val json = HttpHelper.get(url)
-            produtos = parserJson(json)
-            //salvar offline
-            for (p in produtos){
-                saveOffline(p)
-            }
-            return produtos
-        }else{
-            val dao = DatabaseManager.getProdutosDAO()
-            val produtos = dao.findAll()
-            return produtos
-        }
+        val url = "$host/produtos"
+        val json = HttpHelper.get(url)
+        produtos = parserJson(json)
+        return produtos
     }
 
     fun delete(produto: Produtos): Response {
-        Log.d(TAG, produto.idProduto.toString())
-        if(AndroidUtils.isInternetDisponivel(MaisVendasApplication.getInstance().applicationContext)) {
+
+        try {
             val url = "${host}/produtos/${produto.idProduto}"
             val json = HttpHelper.delete(url)
 
             return parserJson(json)
-        }else{
-            val dao = DatabaseManager.getProdutosDAO()
-            dao.delete(produto)
-            return Response(status = "OK", msg = "Dados Salvos Localmente")
+        }catch (e : Exception) {
+            return Response(status = "FAIL", msg = "Falha ao deletar Produto")
         }
     }
 
     fun save(produto: Produtos): Response {
-        val json = HttpHelper.post("${host}/produtos", produto.toJson())
-        return parserJson(json)
+        try {
+            val json = HttpHelper.post("${host}/produtos", produto.toJson())
+            return parserJson(json)
+        }catch (e : Exception){
+            return Response(status = "FAIL", msg = "Falha ao salvar Produto")
+        }
     }
 
-    fun edit(produto: Produtos): Response {
-        Log.d(TAG, produto.toJson())
-        val json = HttpHelper.put("$host/produtos/${produto.idProduto}", produto.toJson())
-        return parserJson(json)
+    fun edit(produto: Produtos): Response? {
+        try {
+            val json = HttpHelper.put("$host/produtos/${produto.idProduto}", produto.toJson())
+            return parserJson(json)
+        }catch (e : Exception){
+            return Response(status = "FAIL", msg = "Falha ao editar Produto")
+        }
     }
 
     //Salvar Offline

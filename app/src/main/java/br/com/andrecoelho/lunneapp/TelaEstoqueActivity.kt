@@ -4,10 +4,13 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -48,12 +51,20 @@ class TelaEstoqueActivity : DebugActivity(), NavigationView.OnNavigationItemSele
     }
 
     fun taskEstoque(){
-        Thread {
-            this.estoque = EstoqueService.getEstoque(context)
-            runOnUiThread {
-                recyclerEstoque?.adapter = EstoqueAdapter(estoque) { onClikEstoque(it) }
-            }
-        }.start()
+            Thread {
+                try {
+                    this.estoque = EstoqueService.getEstoque(context)
+                    runOnUiThread {
+                        recyclerEstoque?.adapter = EstoqueAdapter(estoque) { onClikEstoque(it) }
+                    }
+                }catch (e : Exception){
+                    runOnUiThread {
+                        //mostrar um alert De Falta de Conexão
+                        Toast.makeText(context, "Erro de Conexão", Toast.LENGTH_SHORT).show()
+                        allert()
+                    }
+                }
+            }.start()
     }
 
     fun onClikEstoque(estoque: Estoque){
@@ -73,6 +84,8 @@ class TelaEstoqueActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         val id = item?.itemId
         if(id == R.id.action_adicionar){
             startActivityForResult(intent, REQUEST_CADASTRO)
+        }else if (id == R.id.action_request){
+            taskEstoque()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -130,5 +143,15 @@ class TelaEstoqueActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         }
         telaMenuLateral5.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun allert(){
+        Log.d("teste","Alert")
+        AlertDialog.Builder(context).setTitle(R.string.app_name).setMessage("Erro de Conexão")
+            .setPositiveButton("Ok") {
+                    dialog, which ->
+                dialog.dismiss()
+                taskEstoque()
+            }.create().show()
     }
 }

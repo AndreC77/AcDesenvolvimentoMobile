@@ -5,6 +5,7 @@ import android.util.Log
 import br.com.fernandosousa.lmsapp.HttpHelper
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.lang.Exception
 
 object FormaDePgtoService {
 
@@ -13,45 +14,40 @@ object FormaDePgtoService {
 
     fun getForma(context: Context): List<FormaDePagamento> {
         var formas = ArrayList<FormaDePagamento>()
-        if(AndroidUtils.isInternetDisponivel(context)) {
-            val url = "${host}/formadepagamento"
-            val json = HttpHelper.get(url)
-            formas = parserJson(json)
-            //salvar offline
-            for (f in formas){
-                saveOffline(f)
-            }
-            return formas
-        }else{
-            val dao = DatabaseManager.getFormaDePgtoDAO()
-            val formas = dao.findAll()
-            return formas
-        }
+        val url = "${host}/formadepagamento"
+        val json = HttpHelper.get(url)
+        formas = parserJson(json)
+        return formas
     }
 
     fun delete(forma: FormaDePagamento): Response {
-        Log.d(TAG, forma.idFormaDePgto.toString())
-        if (AndroidUtils.isInternetDisponivel(MaisVendasApplication.getInstance().applicationContext)) {
+
+        try {
             val url = "${host}/formadepagamento/${forma.idFormaDePgto}"
             val json = HttpHelper.delete(url)
 
             return parserJson(json)
-        }else{
-            val dao = DatabaseManager.getFormaDePgtoDAO()
-            dao.delete(forma)
-            return Response(status = "OK", msg = "Dados Salvos Localmente")
+        }catch (e : Exception) {
+            return Response(status = "FAIL", msg = "Falha ao deletar Forma de Pagamento")
         }
     }
 
     fun save(forma: FormaDePagamento): Response {
-        val json = HttpHelper.post("${host}/formadepagamento", forma.toJson())
-        return parserJson(json)
+        try {
+            val json = HttpHelper.post("${host}/formadepagamento", forma.toJson())
+            return parserJson(json)
+        }catch (e : Exception){
+            return Response(status = "FAIL", msg = "Falha ao salvar Forma de Pamento")
+        }
     }
 
-    fun edit(forma: FormaDePagamento): Response {
-        Log.d(TAG, forma.toJson())
-        val json = HttpHelper.put("$host/formadepagamento/${forma.idFormaDePgto}", forma.toJson())
-        return parserJson(json)
+    fun edit(forma: FormaDePagamento): Response? {
+        try {
+            val json = HttpHelper.put("$host/formadepagamento/${forma.idFormaDePgto}", forma.toJson())
+            return parserJson(json)
+        }catch (e : Exception){
+            return Response(status = "FAIL", msg = "Falha ao editar Forma de Pagamneto")
+        }
     }
 
     //Salvar Offline

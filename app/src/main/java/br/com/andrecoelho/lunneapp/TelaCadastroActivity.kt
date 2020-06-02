@@ -41,16 +41,18 @@ class TelaCadastroActivity : DebugActivity() {
         }else{
             // ação do Button Para salvar a Cor
             buttonSalvarCor.setOnClickListener{
+                Log.d("teste", " 3 valor = ${insertCodigoCor.text}")
                 //Validacao dos dados
                 var dadosValidados = validarDados()
                 if(dadosValidados) {
                     val cor = Cores()
-                    Log.d("teste", " 3 valor = ${insertCodigoCor.text}")
+                    Log.d("teste", " 4 valor = ${insertCodigoCor.text}")
                     cor.descricaoCor = insertDescCor.text.toString()
                     cor.codCor = parseLong(insertCodigoCor.text.toString())
                     //chamar a tarefa de salvar a cor
                     taskAtualizar(cor)
                 }else{
+                    Log.d("teste", " 5 valor = ${insertCodigoCor.text}")
                     Toast.makeText(this,"Error em Cadastrar",Toast.LENGTH_SHORT).show()
                 }
             }
@@ -70,12 +72,15 @@ class TelaCadastroActivity : DebugActivity() {
 
     private fun taskAtualizar(cores: Cores) {
         // Thread para salvar a Cor
-        Log.d("WS_LMSApp", cores.toJson())
         Thread {
-            CoresService.save(cores)
+            var resposta = CoresService.save(cores)
             runOnUiThread {
-                // após cadastrar, voltar para activity anterior
-                finish()
+                if(resposta != null) {
+                    Toast.makeText(this, "Error de conexão", Toast.LENGTH_SHORT).show()
+                }else {
+                    // após cadastrar, voltar para activity anterior
+                    finish()
+                }
             }
         }.start()
     }
@@ -83,19 +88,23 @@ class TelaCadastroActivity : DebugActivity() {
     private fun taskPut(cores: Cores) {
        //Thred para Atualizar a Cor
        Thread {
-           CoresService.edit(cores)
+           var resposta = CoresService.edit(cores)
            runOnUiThread {
-               // após cadastrar, voltar para Tela de Cores
-               intent = Intent(this, TelaCoresActivity::class.java)
-               startActivity(intent)
-               finish()
+               if(resposta != null) {
+                   Toast.makeText(this, "Error de conexão", Toast.LENGTH_SHORT).show()
+               }else {
+                   // após cadastrar, voltar para Tela de Cores
+                   intent = Intent(this, TelaCoresActivity::class.java)
+                   startActivity(intent)
+                   finish()
+               }
            }
        }.start()
    }
 
     //função pra validar os dados
     private fun validarDados() : Boolean{
-
+        Log.d("teste", " 1 valor = ${insertCodigoCor.text}")
         var v1 = 0; var v2 = 0
         //campo cod
         var n = insertCodigoCor.text.toString()
@@ -115,13 +124,14 @@ class TelaCadastroActivity : DebugActivity() {
 
         //validar o cod
         if( parseInt(n) > 1 && parseInt(n) <= 999 ){
-            v2 = 2
+            v2 = 1
         }else{
             insertCodigoCor.setError("Codigo deve estar entre 1 e 999")
             insertCodigoCor.requestFocus()
         }
 
-        if(v1 == 1 && v2 == 1){return true}
+        if(v1 == 1 && v2 == 1){Log.d("teste", " 2 valor = ${insertCodigoCor.text}")
+            return true}
         return false
     }
 }

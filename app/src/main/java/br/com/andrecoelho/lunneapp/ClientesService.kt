@@ -13,50 +13,41 @@ object ClientesService {
     val host = "http://192.168.100.8:8080"
     val TAG = "WS_LMSApp"
 
-//    fun getCliente(context: Context): List<Clientes> {
-//
-//        if(AndroidUtils.isInternetDisponivel(context)) {
-//
-//            val url = "$host/clientes"
-//            val json = HttpHelper.get(url)
-//
-//            return parserJson(json)
-//        }else{
-//            return ArrayList<Clientes>()
-//        }
-//    }
 
     fun getCliente(context: Context): List<Clientes> {
+        val url = "$host/clientes"
+        val json = HttpHelper.get(url)
+        return parserJson(json)
+    }
 
+    fun save(cliente: Clientes): Response? {
         try {
-            val url = "$host/clientes"
-            val json = HttpHelper.get(url)
-
+            val json = HttpHelper.post("$host/clientes", cliente.toJson())
             return parserJson(json)
         }catch (e : Exception){
-            return ArrayList<Clientes>()
+            return Response(status = "FAIL", msg = "Falha ao cadastrar cliente")
         }
     }
 
-    fun save(cliente: Clientes): Response {
-        Log.d("Save", cliente.toJson())
-        val json = HttpHelper.post("$host/clientes", cliente.toJson())
-        return parserJson(json)
+    fun delete(cliente: Clientes): Response? {
+
+        try {
+            val url = "$host/clientes/${cliente.idCliente}"
+            val json = HttpHelper.delete(url)
+
+            return parserJson(json)
+        }catch (e : Exception){
+            return  Response(status ="FAIL", msg ="Falha ao deletar cliente")
+        }
     }
 
-    fun delete(cliente: Clientes): Response {
-
-        Log.d("DEL", cliente.idCliente.toString())
-        val url = "$host/clientes/${cliente.idCliente}"
-        val json = HttpHelper.delete(url)
-
-        return parserJson(json)
-    }
-
-    fun edit(cliente: Clientes): Response {
-        Log.d(TAG, cliente.toJson())
-        val json = HttpHelper.put("$host/clientes/${cliente.idCliente}", cliente.toJson())
-        return parserJson(json)
+    fun edit(cliente: Clientes): Response? {
+        try {
+            val json = HttpHelper.put("$host/clientes/${cliente.idCliente}", cliente.toJson())
+            return parserJson(json)
+        }catch (e : Exception){
+            return Response(status = "FAIL", msg = "Falha ao editar cliente")
+        }
     }
 
 //    //Salvar Offline

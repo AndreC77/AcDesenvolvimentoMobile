@@ -5,6 +5,7 @@ import android.util.Log
 import br.com.fernandosousa.lmsapp.HttpHelper
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.lang.Exception
 
 object EnderecoService {
 
@@ -42,8 +43,12 @@ object EnderecoService {
     }
 
     fun save(endereco: Endereco): Response {
-        val json = HttpHelper.post("$host/enderecos", endereco.toJson())
-        return parserJson(json)
+        try {
+            val json = HttpHelper.post("$host/enderecos", endereco.toJson())
+            return parserJson(json)
+        }catch (e : Exception){
+            return Response(status ="FAIL", msg = "Falha ao cadastrar endereço")
+        }
     }
 
     //Salvar Offline

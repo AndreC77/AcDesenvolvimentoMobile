@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_cadastro_produto.*
 import java.lang.Float.parseFloat
 import java.lang.Integer.parseInt
@@ -28,7 +29,7 @@ class CadastroProdutoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro_produto)
 
-
+        insertNcm.addTextChangedListener(Mask.mask("##.##.####", insertNcm))
 
         //spinners
         val spinner1 = this.findViewById<Spinner>(R.id.spinnerUndDesc)
@@ -148,10 +149,14 @@ class CadastroProdutoActivity : AppCompatActivity() {
     private fun taskAtualizar(produtos: Produtos) {
         // Thread para salvar a Cor
         Thread {
-            ProdutosService.save(produtos)
+            var resposta = ProdutosService.save(produtos)
             runOnUiThread {
+                if (resposta != null) {
+                    Toast.makeText(this, "Error de conexão", Toast.LENGTH_SHORT).show()
+                } else{
                 // após cadastrar, voltar para activity anterior
-                finish()
+                    finish()
+            }
             }
         }.start()
     }
@@ -159,12 +164,16 @@ class CadastroProdutoActivity : AppCompatActivity() {
     private fun taskPut(produtos: Produtos) {
         //Thred para Atualizar a Produto
         Thread {
-            ProdutosService.edit(produtos)
+            var resposta = ProdutosService.edit(produtos)
             runOnUiThread {
-                // após cadastrar, voltar para Tela de Produtos
-                intent = Intent(this, TelaProdutosActivity::class.java)
-                startActivity(intent)
-                finish()
+                if(resposta != null) {
+                    Toast.makeText(this, "Error de conexão", Toast.LENGTH_SHORT).show()
+                }else {
+                    // após cadastrar, voltar para Tela de Produtos
+                    intent = Intent(this, TelaProdutosActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
             }
         }.start()
     }

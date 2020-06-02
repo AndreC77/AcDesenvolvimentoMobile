@@ -17,6 +17,10 @@ class CadastroClienteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro_cliente)
 
+        //Mask Tel and Cell
+        insertTelCliente.addTextChangedListener(Mask.mask("(##) ####-####", insertTelCliente))
+        insertCelCliente.addTextChangedListener(Mask.mask("(##) #####-####", insertCelCliente))
+
         //recuperar objeto
         clientes = intent.getSerializableExtra("clientes") as? Clientes
         if (clientes != null){
@@ -41,7 +45,11 @@ class CadastroClienteActivity : AppCompatActivity() {
             insertUf.setText(clientes?.enderecoEntity?.uf.toString())
             insertIbge.setText(clientes?.enderecoEntity?.ibge.toString())
 
-
+            //mascara numero telefone
+//            var smf = SimpleMaskFormatter("(NN) NNNNN-NNNN")
+//            var mtw = MaskTextWatcher(insertTelCliente,smf)
+//            insertTelCliente.addTextChangedListener(mtw)
+            //fim da mascara
             salvarCliente.setOnClickListener {
                 var validarDados = validarDados()
                 if(validarDados) {
@@ -124,10 +132,14 @@ class CadastroClienteActivity : AppCompatActivity() {
     private fun taskAtualizar(cliente: Clientes) {
         // Thread para salvar a Cor
         Thread {
-            ClientesService.save(cliente)
+            var resposta = ClientesService.save(cliente)
             runOnUiThread {
-                // após cadastrar, voltar para activity anterior
-                finish()
+                if(resposta != null) {
+                    Toast.makeText(this, "Erro de conexão", Toast.LENGTH_SHORT).show()
+                }else {
+                    // após cadastrar, voltar para activity anterior
+                    finish()
+                }
             }
         }.start()
     }
@@ -135,12 +147,16 @@ class CadastroClienteActivity : AppCompatActivity() {
     private fun taskPut(cliente: Clientes) {
         //Thred para Atualizar a Cor
         Thread {
-            ClientesService.edit(cliente)
+            var resposta = ClientesService.edit(cliente)
             runOnUiThread {
-                // após cadastrar, voltar para Tela de Cores
-                intent = Intent(this, TelaClienteActivity::class.java)
-                startActivity(intent)
-                finish()
+                if(resposta != null) {
+                    Toast.makeText(this, "Error de conexão", Toast.LENGTH_SHORT).show()
+                }else {
+                    // após cadastrar, voltar para Tela de Cores
+                    intent = Intent(this, TelaClienteActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
             }
         }.start()
     }

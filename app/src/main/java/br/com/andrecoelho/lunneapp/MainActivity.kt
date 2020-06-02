@@ -58,23 +58,23 @@ class MainActivity : DebugActivity() {
             Prefs.setString("lembrarSenha", "")
         }
 
-
         //POST  de Senha
         Thread {
             resposta = VendedorService.senha(vendedor)
             Log.d("senha",resposta.toString())
+            runOnUiThread{
+                resposta?.toJson()
+                var name = resposta?.nome.toString()
+                //Validação da senha
+                if(resposta != null){
+                    Toast.makeText(this, "Bem vindo Usuario: $name ", Toast.LENGTH_SHORT).show()
+                    startActivity(intent)
+                }else {
+                    Toast.makeText(this, "Usuario ou Senha Incorreto", Toast.LENGTH_SHORT).show()
+                }
+            }
         }.start()
-        resposta?.toJson()
-        Log.d("senha","teste ${resposta.toString()}")
-        var name = resposta?.nome.toString()
 
-        //Validacao do Login
-        if(resposta != null){
-            Toast.makeText(this, "Bem vindo Usuario: $name ", Toast.LENGTH_SHORT).show()
-            startActivity(intent)
-        }else {
-            Toast.makeText(this, "Usuario ou Senha Incorreto", Toast.LENGTH_SHORT).show()
-        }
         progressBar.visibility = View.INVISIBLE
     }
 }

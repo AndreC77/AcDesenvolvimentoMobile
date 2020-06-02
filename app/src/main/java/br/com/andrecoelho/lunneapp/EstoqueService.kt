@@ -5,6 +5,7 @@ import android.util.Log
 import br.com.fernandosousa.lmsapp.HttpHelper
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.lang.Exception
 
 object EstoqueService {
 
@@ -13,44 +14,38 @@ object EstoqueService {
 
     fun getEstoque(context: Context): List<Estoque> {
         var estoques = ArrayList<Estoque>()
-        if(AndroidUtils.isInternetDisponivel(context)) {
-            val url = "${host}/estoque"
-            val json = HttpHelper.get(url)
-            estoques = parserJson(json)
-            //salvar offline
-            for (e in estoques){
-                saveOffline(e)
-            }
-            return estoques
-        }else{
-            val dao = DatabaseManager.getEstoqueDAO()
-            val estoque = dao.findAll()
-            return estoque
-        }
+        val url = "${host}/estoque"
+        val json = HttpHelper.get(url)
+        estoques = parserJson(json)
+        return estoques
     }
 
     fun delete(estoque: Estoque): Response {
-        Log.d(TAG, estoque.idEstoque.toString())
-        if(AndroidUtils.isInternetDisponivel(MaisVendasApplication.getInstance().applicationContext)){
+        try {
             val url = "${host}/estoque/${estoque.idEstoque}"
             val json = HttpHelper.delete(url)
             return parserJson(json)
-        }else{
-            val dao = DatabaseManager.getEstoqueDAO()
-            dao.delete(estoque)
-            return Response(status = "OK", msg = "Dados Salvos Localmente")
+        }catch (e : Exception){
+            return Response(status = "FAIL", msg = "Falha ao deletar Estoque")
         }
     }
 
     fun save(estoque: Estoque): Response {
-        val json = HttpHelper.post("${host}/estoque", estoque.toJson())
-        return parserJson(json)
+        try {
+            val json = HttpHelper.post("${host}/estoque", estoque.toJson())
+            return parserJson(json)
+        }catch (e : Exception){
+            return Response(status = "FAIL", msg = "Falha ao salvar Estoque")
+        }
     }
 
-    fun edit(estoque: Estoque): Response {
-        Log.d(TAG, estoque.toJson())
-        val json = HttpHelper.put("$host/estoque/${estoque.idEstoque}", estoque.toJson())
-        return parserJson(json)
+    fun edit(estoque: Estoque): Response? {
+        try {
+            val json = HttpHelper.put("$host/estoque/${estoque.idEstoque}", estoque.toJson())
+            return parserJson(json)
+        }catch (e : Exception){
+            return Response(status = "FAIL", msg = "Falha ao editar Estoque")
+        }
     }
 
     //Salvar Offline

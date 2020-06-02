@@ -26,6 +26,10 @@ class CadastroVendedorActivity : DebugActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro_vendedor)
 
+        //Mask Tel and Cell
+        insertTelVendedor.addTextChangedListener(Mask.mask("(##) ####-####", insertTelVendedor))
+        insertCelVendedor.addTextChangedListener(Mask.mask("(##) #####-####", insertCelVendedor))
+
         val spinnerV = this.findViewById<Spinner>(R.id.spinnerFuncionario)
         //Adapter
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, this.par1)
@@ -100,10 +104,14 @@ class CadastroVendedorActivity : DebugActivity() {
     private fun taskAtualizar(vendedor: Vendedor) {
         // Thread para salvar a Cor
         Thread {
-            VendedorService.save(vendedor)
+            var resposta = VendedorService.save(vendedor)
             runOnUiThread {
-                // após cadastrar, voltar para activity anterior
-                finish()
+                if(resposta != null) {
+                    Toast.makeText(this, "Error de conexão", Toast.LENGTH_SHORT).show()
+                }else {
+                    // após cadastrar, voltar para activity anterior
+                    finish()
+                }
             }
         }.start()
     }
@@ -111,12 +119,16 @@ class CadastroVendedorActivity : DebugActivity() {
     private fun taskPut(vendedor: Vendedor) {
         //Thred para Atualizar o Vendedor
         Thread {
-            VendedorService.edit(vendedor)
+            var resposta = VendedorService.edit(vendedor)
             runOnUiThread {
-                // após cadastrar, voltar para Tela de Vendedores
-                intent = Intent(this, TelaVendedorActivity::class.java)
-                startActivity(intent)
-                finish()
+                if(resposta != null) {
+                    Toast.makeText(this, "Error de conexão", Toast.LENGTH_SHORT).show()
+                }else {
+                    // após cadastrar, voltar para Tela de Vendedores
+                    intent = Intent(this, TelaVendedorActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
             }
         }.start()
     }

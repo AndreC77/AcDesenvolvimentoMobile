@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.component1
 
 
@@ -56,10 +57,18 @@ class TelaClienteActivity : DebugActivity(), NavigationView.OnNavigationItemSele
 
     fun taskClientes(){
         Thread {
+            try{
             this.clientes = ClientesService.getCliente(context)
             runOnUiThread {
                 recyclerClientes?.adapter = ClientesAdapter(clientes) { onClikClientes(it) }
+            }
                 //enviarNotificacao(this.clientes.get(0))
+            }catch (e : Exception){
+                runOnUiThread {
+                    //mostrar um alert De Falta de Conexão
+                    Toast.makeText(context, "Erro de Conexão", Toast.LENGTH_SHORT).show()
+                    allert()
+                }
             }
         }.start()
     }
@@ -149,6 +158,15 @@ class TelaClienteActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         intent.putExtra("cliente", cliente)
         //disparar notificacao
         NotificationUtil.create(this, 0, intent, "Mais Vendas","Você tem uma Nova mudança no cliente ${cliente.nomeCompleto}")
+    }
+
+    private fun allert(){
+        AlertDialog.Builder(context).setTitle(R.string.app_name).setMessage("Erro de Conexão")
+            .setPositiveButton("Ok") {
+                    dialog, which ->
+                dialog.dismiss()
+                taskClientes()
+            }.create().show()
     }
 
 }

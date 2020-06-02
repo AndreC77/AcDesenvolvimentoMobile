@@ -156,10 +156,14 @@ class CadastroFormaActivity : DebugActivity() {
     private fun taskAtualizar(forma: FormaDePagamento) {
         // Thread para salvar a forma
         Thread {
-            FormaDePgtoService.save(forma)
+            var resposta = FormaDePgtoService.save(forma)
             runOnUiThread {
-                // após cadastrar, voltar para activity anterior
-                finish()
+                if(resposta != null) {
+                    Toast.makeText(this, "Error de conexão", Toast.LENGTH_SHORT).show()
+                }else {
+                    // após cadastrar, voltar para activity anterior
+                    finish()
+                }
             }
         }.start()
     }
@@ -167,12 +171,16 @@ class CadastroFormaActivity : DebugActivity() {
     private fun taskPut(forma: FormaDePagamento) {
         //Thred para Atualizar a forma
         Thread {
-            FormaDePgtoService.edit(forma)
+            var resposta = FormaDePgtoService.edit(forma)
             runOnUiThread {
-                // após cadastrar, voltar para Tela de Cores
-                intent = Intent(this, TelaFormaDePgtoActivity::class.java)
-                startActivity(intent)
-                finish()
+                if(resposta != null) {
+                    Toast.makeText(this, "Error de conexão", Toast.LENGTH_SHORT).show()
+                }else {
+                    // após cadastrar, voltar para Tela de Cores
+                    intent = Intent(this, TelaFormaDePgtoActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
             }
         }.start()
     }

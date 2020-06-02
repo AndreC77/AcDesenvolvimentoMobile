@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_tela_cliente.*
 import kotlinx.android.synthetic.main.activity_tela_cliente.menulateral
 import kotlinx.android.synthetic.main.activity_tela_produtos.*
 import kotlinx.android.synthetic.main.toolbar.*
+import java.lang.Exception
 
 class TelaProdutosActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -50,11 +52,17 @@ class TelaProdutosActivity : AppCompatActivity(), NavigationView.OnNavigationIte
     fun taskProdutos(){
 
         Thread {
-            this.produtos = ProdutosService.getProdutos(context)
-            runOnUiThread {
-                recyclerProdutos?.adapter = ProdutosAdapter(produtos) { onClikProdutos(it) }
+            try {
+                this.produtos = ProdutosService.getProdutos(context)
+                runOnUiThread {
+                    recyclerProdutos?.adapter = ProdutosAdapter(produtos) { onClikProdutos(it) }
+                }
+            }catch (e : Exception){
+                runOnUiThread {
+                    Toast.makeText(context, "Erro de Conexão", Toast.LENGTH_SHORT).show()
+                    allert()
+                }
             }
-
         }.start()
     }
 
@@ -77,6 +85,8 @@ class TelaProdutosActivity : AppCompatActivity(), NavigationView.OnNavigationIte
         val id = item?.itemId
         if(id == R.id.action_adicionar){
             startActivityForResult(intent, REQUEST_CADASTRO)
+        }else if (id == R.id.action_request){
+            taskProdutos()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -135,6 +145,15 @@ class TelaProdutosActivity : AppCompatActivity(), NavigationView.OnNavigationIte
         telaMenuLateral2.closeDrawer(GravityCompat.START)
 
         return true
+    }
+
+    private fun allert(){
+        AlertDialog.Builder(context).setTitle(R.string.app_name).setMessage("Erro de Conexão")
+            .setPositiveButton("Ok") {
+                    dialog, which ->
+                dialog.dismiss()
+                taskProdutos()
+            }.create().show()
     }
 
 }

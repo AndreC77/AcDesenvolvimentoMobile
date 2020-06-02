@@ -3,6 +3,8 @@ package br.com.andrecoelho.lunneapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_cadastro_estoque.*
@@ -38,6 +40,7 @@ class CadastroEstoqueActivity : AppCompatActivity() {
         }else{
 
             buttonSalvarEstoque.setOnClickListener {
+
                 var validarDados = validarDados()
                 if(validarDados) {
                     val estoque = Estoque()
@@ -65,10 +68,14 @@ class CadastroEstoqueActivity : AppCompatActivity() {
     private fun taskAtualizar(estoque: Estoque) {
         // Thread para salvar a estoque
         Thread {
-            EstoqueService.save(estoque)
+            var resposta = EstoqueService.save(estoque)
             runOnUiThread {
-                // após cadastrar, voltar para activity anterior
-                finish()
+                if(resposta != null) {
+                  Toast.makeText(this, "Error de conexão", Toast.LENGTH_SHORT).show()
+                }else {
+                    // após cadastrar, voltar para activity anterior
+                    finish()
+                }
             }
         }.start()
     }
@@ -76,12 +83,16 @@ class CadastroEstoqueActivity : AppCompatActivity() {
     private fun taskPut(estoque: Estoque) {
         //Thred para Atualizar a Estoque
         Thread {
-            EstoqueService.edit(estoque)
+            var resposta = EstoqueService.edit(estoque)
             runOnUiThread {
-                // após cadastrar, voltar para Tela de Estoques
-                intent = Intent(this, TelaEstoqueActivity::class.java)
-                startActivity(intent)
-                finish()
+                if(resposta != null) {
+                    Toast.makeText(this, "Error de conexão", Toast.LENGTH_SHORT).show()
+                }else {
+                    // após cadastrar, voltar para Tela de Estoques
+                    intent = Intent(this, TelaEstoqueActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
             }
         }.start()
     }
@@ -107,7 +118,7 @@ class CadastroEstoqueActivity : AppCompatActivity() {
             insertQtdEstoque.requestFocus()
         }
 
-        if(v1 == 1 && v2 == 2){return true}
+        if(v1 == 1 && v2 == 1){return true}
         return false
     }
 }

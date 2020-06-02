@@ -14,47 +14,21 @@ object VendedorService {
 
     fun getVendedor(context: Context): List<Vendedor> {
         var vendedores = ArrayList<Vendedor>()
-        if(AndroidUtils.isInternetDisponivel(context)) {
-            val url = "${host}/vendedores"
-            val json = HttpHelper.get(url)
-            vendedores = parserJson(json)
-            //salvar offline
-            for (v in vendedores){
-                saveOffline(v)
-            }
-            return vendedores
-        }else{
-            val dao = DatabaseManager.getVendedorDAO()
-            val vendedores = dao.findAll()
-            return vendedores
-        }
+        val url = "${host}/vendedores"
+        val json = HttpHelper.get(url)
+        vendedores = parserJson(json)
+        return vendedores
     }
 
-//    fun delete(vendedor: Vendedor): Response {
-//        Log.d(TAG, vendedor.id.toString())
-//        if (AndroidUtils.isInternetDisponivel(MaisVendasApplication.getInstance().applicationContext)) {
-//            val url = "${host}/vendedores/${vendedor.id}"
-//            val json = HttpHelper.delete(url)
-//
-//            return parserJson(json)
-//        }else{
-//            val dao = DatabaseManager.getVendedorDAO()
-//            dao.delete(vendedor)
-//            return Response(status = "OK", msg = "Dados Salvos Localmente")
-//        }
-//    }
 
     fun delete(vendedor: Vendedor): Response {
-        Log.d(TAG, vendedor.id.toString())
         try {
             val url = "${host}/vendedores/${vendedor.id}"
             val json = HttpHelper.delete(url)
 
             return parserJson(json)
         }catch (e : Exception) {
-            val dao = DatabaseManager.getVendedorDAO()
-            dao.delete(vendedor)
-            return Response(status = "OK", msg = "Dados Salvos Localmente")
+            return Response(status = "FAIL", msg = "Falha ao deletar Vendedor")
         }
     }
 
@@ -63,17 +37,16 @@ object VendedorService {
             val json = HttpHelper.post("${host}/vendedores", vendedor.toJson())
             return parserJson(json)
         }catch (e : Exception){
-            return null
+            return Response(status = "FAIL", msg = "Falha ao salvar Vendedor")
         }
     }
 
     fun edit(vendedor: Vendedor): Response? {
         try {
-            Log.d(TAG, vendedor.toJson())
             val json = HttpHelper.put("$host/vendedores/${vendedor.id}", vendedor.toJson())
             return parserJson(json)
         }catch (e : Exception){
-            return null
+            return Response(status = "FAIL", msg = "Falha ao editar Vendedor")
         }
     }
 

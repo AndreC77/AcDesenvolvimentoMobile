@@ -124,6 +124,56 @@
             android:layout_marginTop="10dp"
             card_view:layout_constraintStart_toEndOf="@+id/txtTelCliente"
             card_view:layout_constraintTop_toBottomOf="@+id/razaoSocial" />
+
+        <Button
+            android:id="@+id/enviarSms"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="69dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="67dp"
+            android:backgroundTint="#000000"
+            android:text="Enviar"
+            android:textColor="@color/branco"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/txtSms" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:text="Celular:"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/txtTelCliente" />
+
+        <TextView
+            android:id="@+id/celCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            card_view:layout_constraintStart_toEndOf="@+id/textView2"
+            card_view:layout_constraintTop_toBottomOf="@+id/telCliente" />
+
+        <EditText
+            android:id="@+id/txtSms"
+            android:layout_width="267dp"
+            android:layout_height="97dp"
+            android:layout_marginStart="99dp"
+            android:layout_marginTop="52dp"
+            android:layout_marginEnd="99dp"
+            android:background="@drawable/bg_form_field_sqr"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Escreva sua Menssagem aqui!"
+            android:inputType="textMultiLine"
+            android:padding="5dp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/textView2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

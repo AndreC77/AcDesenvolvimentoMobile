@@ -3,23 +3,34 @@ package br.com.andrecoelho.lunneapp
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.telephony.SmsManager
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_clientes.*
 import kotlinx.android.synthetic.main.toolbar.*
 import java.io.Serializable
+import java.util.jar.Manifest
 
 class ClientesActivity : DebugActivity() {
 
     private var REQUEST_CADASTRO = 1
     private var REQUEST_REMOVE = 2
-     private val context: Context get() = this
-     var cliente: Clientes? = null
+    private val context: Context get() = this
+    var cliente: Clientes? = null
+
+    //busca a permisson
+    val permisson = arrayOf(android.Manifest.permission.SEND_SMS)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_clientes)
+
+        //Pedir permissão ao usuario pra mandar sms
+        ActivityCompat.requestPermissions(this, permisson,1)
 
         //recuperar objeto de Cliente da intent
           cliente = intent.getSerializableExtra("cliente") as Clientes
@@ -31,6 +42,23 @@ class ClientesActivity : DebugActivity() {
         registroFederal.text = cliente?.registroFederal
         razaoSocial.text = cliente?.razaoSocial
         telCliente.text = cliente?.numeroTelefone
+        celCliente.text = cliente?.numeroCelular
+
+        //envento de click
+        enviarSms.setOnClickListener {
+
+            var numero = cliente?.numeroCelular
+            var msg = txtSms.text.toString()
+
+            //a classe que envia msg
+            var sms = SmsManager.getDefault()
+            sms.sendTextMessage(numero,null, msg,null,null)
+
+            //ação que de Toast pra informar o usuario do envio da msg e zerar o campo de texto
+            Toast.makeText(this, "Menssagen enviada!", Toast.LENGTH_SHORT).show()
+            txtSms.setText("")
+
+        }
 
 
         //colocar toobar
