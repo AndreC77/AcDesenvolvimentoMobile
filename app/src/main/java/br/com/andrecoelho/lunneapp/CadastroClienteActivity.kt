@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_cadastro_cliente.*
@@ -96,6 +97,7 @@ class CadastroClienteActivity : AppCompatActivity() {
                     endereco.bairro = insertBairro.text.toString()
                     endereco.logradouro = insertRua.text.toString()
                     endereco.uf = insertUf.text.toString()
+                    if (insertIbge.text.toString() == ""){insertIbge.setText("0")}
                     endereco.ibge = parseLong(insertIbge.text.toString())
 
                     //cliente
@@ -164,8 +166,8 @@ class CadastroClienteActivity : AppCompatActivity() {
     private fun validarDados() : Boolean{
 
         //validade dos Campos entre 1 ou 0
-        var v1 = 0; var v2 = 0; var v3 = 0; var v4 = 0; var v5 = 0; var v6 = 0; var v7 = 0; var v8 = 0;
-        var v9 = 0; var v10 = 0; var v11 = 0; var v12 = 0; var v13 = 0; var v14 = 0; var v15 = 0; var v16 = 0;
+        var v1 = 0; var v2 = 0; var v4 = 0; var v5 = 0; var v6 = 0; var v7 = 0; var v8 = 0;
+        var v9 = 0; var v10 = 0; var v11 = 0; var v12 = 0; var v13 = 0; var v14 = 0; var v15 = 0;
 
         //campo Cod
         if(!TextUtils.isEmpty(insertCodCliente.text.toString())){
@@ -184,21 +186,21 @@ class CadastroClienteActivity : AppCompatActivity() {
             insertRegFederal.requestFocus()
         }
 
-        //campo Insc Estadual
-        if(!TextUtils.isEmpty(insertInsEstadual.text.toString())){
-            v16 = 1
-        }else{
-            insertInsEstadual.setError("Campo deve ser preenchido")
-            insertInsEstadual.requestFocus()
-        }
+//        //campo Insc Estadual
+//        if(!TextUtils.isEmpty(insertInsEstadual.text.toString())){
+//            v16 = 1
+//        }else{
+//            insertInsEstadual.setError("Campo deve ser preenchido")
+//            insertInsEstadual.requestFocus()
+//        }
 
-        //campo Razao Social
-        if(!TextUtils.isEmpty(insertRazSocial.text.toString()) && insertRazSocial.text.length > 4 && insertRazSocial.text.length < 51){
-            v3 = 1
-        }else{
-            insertRazSocial.setError("Razão Social tem que ter min 5 caracteres max 50")
-            insertRazSocial.requestFocus()
-        }
+//        //campo Razao Social
+//        if(!TextUtils.isEmpty(insertRazSocial.text.toString()) && insertRazSocial.text.length > 4 && insertRazSocial.text.length < 51){
+//            v3 = 1
+//        }else{
+//            insertRazSocial.setError("Razão Social tem que ter min 5 caracteres max 50")
+//            insertRazSocial.requestFocus()
+//        }
 
         //campo Nome Fantasia
         if(!TextUtils.isEmpty(insertNomeFantazia.text.toString()) && insertNomeFantazia.text.length > 4 && insertNomeFantazia.text.length < 51){
@@ -264,13 +266,13 @@ class CadastroClienteActivity : AppCompatActivity() {
             insertNumCasa.requestFocus()
         }
 
-        //campo Complemento
-        if(!TextUtils.isEmpty(insertCompl.text.toString())){
-            v12 = 1
-        }else{
-            insertCompl.setError("Campo deve ser preenchido")
-            insertCompl.requestFocus()
-        }
+//        //campo Complemento
+//        if(!TextUtils.isEmpty(insertCompl.text.toString())){
+//            v12 = 1
+//        }else{
+//            insertCompl.setError("Campo deve ser preenchido")
+//            insertCompl.requestFocus()
+//        }
 
         //campo Bairro
         if(!TextUtils.isEmpty(insertBairro.text.toString())){
@@ -296,8 +298,8 @@ class CadastroClienteActivity : AppCompatActivity() {
             insertUf.requestFocus()
         }
 
-        if(v1 == 1 && v2 == 1 && v3 == 1 && v4 == 1 && v5 == 1 && v6 == 1 && v7 == 1 &&
-            v8 == 1 && v9 == 1 && v10 == 1 && v11 == 1 && v12 == 1 && v13 == 1 && v14 == 1 && v15 == 1 && v16 == 1){return true}
+        if(v1 == 1 && v2 == 1 && v4 == 1 && v5 == 1 && v6 == 1 && v7 == 1 &&
+            v8 == 1 && v9 == 1 && v10 == 1 && v11 == 1 &&  v13 == 1 && v14 == 1 && v15 == 1){return true}
 
         return false
     }

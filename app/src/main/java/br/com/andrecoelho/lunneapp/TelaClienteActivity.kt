@@ -135,10 +135,6 @@ class TelaClienteActivity : DebugActivity(), NavigationView.OnNavigationItemSele
                     startActivity(intent4)
                     //Toast.makeText(this, "Localização", Toast.LENGTH_SHORT).show()
                     )
-            R.id.nav_cores -> (
-                    startActivity(intent5)
-                    //Toast.makeText(this, "Site", Toast.LENGTH_SHORT).show()
-                    )
         }
 
         if (item.itemId == R.id.nav_sair){
